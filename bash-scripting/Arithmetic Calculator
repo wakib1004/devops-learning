@@ -1,0 +1,30 @@
+Basic Arithmetic Calculator:
+:'Bash script that performs basic 
+arithmetic (addition, subtraction,multiplication,
+and division) on two user-provided integers 
+while preventing system errors from division by zero.
+'
+#!/bin/bash
+#promts user to write a number
+echo "Select the first number"
+read num1
+echo "Select the second number"
+read num2
+
+sum=$((num1 + num2))
+echo "$num1 + $num2 is $sum"
+
+takeaway=$((num1 - num2))
+echo "$num1 - $num2 is $takeaway"
+
+product=$((num1 * num2))
+echo "$num1 x $num2 is $product"
+
+#Handles division by 0  
+if [ $num2 == 0 ]; then
+ echo "Error: Second number is 0, numbers cannot divide by 0"
+ exit 1
+fi
+
+quotient=$((num1 / num2))
+echo "$num1 / $num2 is $quotient"
