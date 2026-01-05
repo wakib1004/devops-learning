@@ -108,4 +108,46 @@ fi
 
  ```
 
+#Level 7: File Sorting Script
+Script that sorts all .txt files in a directory by their size, from smallest to largest, 
+and displays the sorted list.
+
+```bash
+#!/bin/bash
+directory=$1
+ls -Srl $directory/*.txt | awk '{print $5, $9}'
+
+:' This is used by passing in "directory_name"
+./script_name.sh "directory_name"
+'
+
+```
+
+#Level 8: Multi-File Searcher
+Searches for a specific word or phrase across all .log files in a directory and outputs
+the names of the files that contain the word or phrase.
+
+```bash
+
+#!/bin/bash
+
+directory="Arena"
+word_or_phrase="line"
+
+#Exits if directory "Arena" does not exist.
+if [ ! -d "$directory" ]; then
+  echo "$directory does not exist."
+  exit 1
+fi
+
+grep -l "$word_or_phrase" $directory/*.log
+exit_code=$?
+
+if [ $exit_code -ge 1 ]; then
+ echo "The word/phrase $word_or_phrase does not exist in any .log files in this directory"
+fi
+
+```
+
+
  
