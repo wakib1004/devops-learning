@@ -1,0 +1,111 @@
+#Level 1: The Basics
+** Create a script that creates an Arena directory, adds warrior.txt, mage.txt, and archer.txt inside it, and lists the contents of the directory. **
+
+```bash
+#!/bin/bash
+
+mkdir Arena
+ cd Arena
+ touch warrior.txt mage.txt archer.txt
+ ls
+```
+
+#Level 2: Variables and Loops
+** Create a script that outputs the numbers 1 to 10, one number per line. **
+
+```bash 
+#!/bin/bash
+
+number=1
+
+#Ouputs numbers 1 to 10 
+while [ $number -lt 11 ]; do
+  echo "$number"
+  ((number++))
+done
+```
+
+#3: Conditional Statements
+** Write a script that checks if a file named hero.txt exists in the Arena
+directory. If it does, print "Hero found!"; otherwise, print "Hero missing!". **
+
+```bash 
+#!/bin/bash
+
+if [ -f Arena/hero.txt ]; then
+  echo "Hero found!"
+else
+  echo "Hero missing!"
+fi
+```
+
+#Level 4: File Manipulation
+**Create a script that copies all .txt files from the Arena directory to a new directory called Backup.**
+
+```bash
+#!/bin/bash
+
+mkdir -p ~/Backup
+cp ~/Arena/*.txt ~/Backup
+```
+
+#Level 5: 
+** :' Script that: 
+
+1. Creates "Battlefield" directory and 3 files within it: knight.txt, sorcerer.txt, rogue.txt.
+2. Checks if **knight.txt** exists inside **Battlefield**.
+   * If it exists, creates a folder called **Archive** and moves `knight.txt` into it.
+3. Displays the contents of both "Battlefield" and "Archive" directories.
+  
+This combines directory creation, file creation, conditional checking, moving files, and listing contents — all in one workflow.
+ '
+
+ ```bash 
+#!/bin/bash
+
+mkdir Battlefield
+cd Battlefield
+touch knight.txt sorcerer.txt rogue.txt
+
+if [ -f Battlefield/knight.txt ]; then
+  mkdir Archive
+  mv knight.txt Archive/knight.txt
+fi
+
+echo "Contents of Battlefield:"
+ls Battlefield 
+echo "Content of Archive:"
+ls Archive
+ ```
+
+
+ #Level 6: Argument Parsing
+ :' Write a script that accepts a filename as an argument and prints the number
+ of lines in that file. If no filename is provided, display a message saying 'No file provided'.
+ '
+
+ ```bash
+ 
+#!/bin/bash
+
+#Checks if any arguments were provided
+if [ $# -eq 0 ]; then
+ echo "No filename provided"
+    exit 1
+fi
+
+filename= $1
+number=0
+
+if [ -f $filename ]; then
+  while IFS= read -r line; do
+    ((number++))
+  done < $filename
+  echo "The number of lines in the file is: $number"
+else
+  echo "File not found"
+fi
+
+ ```
+
+ 
