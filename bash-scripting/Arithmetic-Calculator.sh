@@ -1,7 +1,6 @@
 Basic Arithmetic Calculator:
-:'Bash script that performs basic 
-arithmetic (addition, subtraction,multiplication,
-and division) on two user-provided integers 
+:'Bash script that performs addition, subtraction,multiplication,
+and division on two user-provided integers 
 while preventing system errors from division by zero.
 '
 #!/bin/bash
