@@ -2,16 +2,16 @@
 Welcome to the Bash Scripting section of the devops-learning repository. 
 This folder contains a collection of practical automation scripts.
 
-#🚀 Contents
+#  Contents
 1.Levels/
 -⚔️The Bash Battle Arena – A 15-level challenge series.
 There are 15 scripts each for one level.
 
 2.core-chellenges
--Arithmetic-Calculator.sh
--File_Operations.sh
--backup_txt_files.sh 
--Check_file_permissions.sh
+a)Arithmetic-Calculator.sh
+b)File_Operations.sh
+c)backup_txt_files.sh 
+d)check_file_permissions.sh
  
  
  ** Why Bash Matters in Devops **
