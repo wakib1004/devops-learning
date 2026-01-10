@@ -4,17 +4,16 @@
 - Show system uptime
 - Backup the Arena directory and keep the last 3 backups
 - Parse a configuration file settings.conf and display the values
-
 and executes the chosen task
 '
 
 #!/bin/bash
 
-SOURCE_DIR="Arena"
-BACKUP_DIR="Backups"
+SOURCE_DIR=Arena/
+BACKUP_DIR=Backups/
 
 CONFIG_FILE="settings.conf"
-TIMESTAMP=$(date +%-Y%-m%-d)
+TIMESTAMP=$(date '+%Y-%m-%d')-$(date +%-T)
 FILE_NAME=backup_$TIMESTAMP.tgz
 
 options=("Check disk space" "Show system uptime" "Backup Arena DIR" "Parse and display value of settings.config")
@@ -29,9 +28,9 @@ select opt in ${options[@]};
 
             uptime
             ;;
-        "Backup Arena DIR")
+        "Backup Arena DIR to Backups DIR")
 
-            tar --create --gzip --file=$BACKUP_DIR $FILE_NAME $SOURCE_DIR
+            tar --create --gzip --file="$BACKUP_DIR""$FILE_NAME" "$SOURCE_DIR"
 
             cd $SOURCE_DIR
             ls -t | tail -n +4 | while IFS= read -r line; do
