@@ -1,28 +1,17 @@
-🐚 Bash Scripting
+# Bash Scripting
 Welcome to the Bash Scripting section of the devops-learning repository. 
 This folder contains a collection of practical automation scripts.
 
-🚀 Contents
+#🚀 Contents
 1.Levels/
 -⚔️The Bash Battle Arena – A 15-level challenge series.
 There are 15 scripts each for one level.
 
-2.Arithmetic-Calculator.sh
-A script performing basic mathematical operations on two user-provided integers.
-
-3.File_Operations.sh
-Automates file creation, moving, and deletion.
-
-4.backup_txt_files.sh 
-Scans a directory and backs up .txt files to a secure location.
-
-5.Check_file_permissions.sh
-Audits and displays permissions for files in a given path.
- 
- 
- 
- 
- 
+2.core-chellenges
+-Arithmetic-Calculator.sh
+-File_Operations.sh
+-backup_txt_files.sh 
+-Check_file_permissions.sh
  
  
  ** Why Bash Matters in Devops **
