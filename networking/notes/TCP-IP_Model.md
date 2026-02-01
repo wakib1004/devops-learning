@@ -1,19 +1,19 @@
-#TCP/IP Model
+# TCP/IP Model
 
 The TCP/IP model is a 4 layered framework that describes how data is transmitted over 
 a network, especially the Internet, using the Transmission Control Protocol (TCP) and the Internet Protocol (IP).
 
 It is the practical model used in real networks and the Internet.
 
-**🧱 Layers of TCP/IP Model (Top → Bottom)**
+### **🧱 Layers of TCP/IP Model (Top → Bottom)**
 
-1.Application Layer
+1. Application Layer
 
-2.Transport Layer
+2. Transport Layer
 
-3.Internet Layer
+3. Internet Layer
 
-4.Network Access Layer
+4. Network Access Layer
 
 **Application Layer**
 
