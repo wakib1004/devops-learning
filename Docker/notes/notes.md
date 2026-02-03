@@ -32,9 +32,26 @@ A virtual machine (VM) is a software-based computer that runs inside a real comp
 
 ## Container Registry 
 
+A centralised container repository where you deploy the container images (Like Github but for containers)
+
+Docker has one called Docker Hub which provides public and private repositories
+
+All major cloud providers (AWS, Azure, Google Cloud) have a container registry.
+
+---
+
+## What is Docker
+
+Docker is a platform that provides:
+
+- An open source container runtime
+- Mac, Windows and Linux support
+- Command line tool (to create and manage containers)
+- "Dockerfile" file format for building container images.
 
 
 ---
+
 
 ## Definitions 
 
@@ -44,6 +61,7 @@ System libraries - Ready‑made chunks of code your program can call to do speci
 
 System tools - Software programs included with or provided for an operating system that help manage, maintain, configure a computer system.
 
+Centralised Repository - Single, central location where all the project’s code and files are stored, and all team members commit (upload) and pull (download) changes from this one place.
 
 
 ## Container Image 
