@@ -52,6 +52,27 @@ Docker is a platform that provides:
 
 ---
 
+## **Volumes**
+
+Containers normally lose all their data when they stop, so you usually don’t store persistent data inside containers.
+
+A volume is a way to store data outside the container’s writable filesystem so it persists even after the container stops or is removed.
+
+It maps a folder on the host to a directory inside the container.
+
+### Volume commands cheat-sheet
+
+| Command | Description
+| :--- | :--- |
+| docker create volume [volumeName] | Creates a new volume |
+| docker volume ls | Lists the volume or volumes | 
+| docker volume rm [volumeName] | Deletes the volume | 
+| docker volume prune | Deletes all volumes not in mounted / not in use |
+| docker volume inspect [volumeName] | Displays the volume info | 
+
+---
+
+## Docker Compose
 
 ## Definitions 
 
@@ -63,7 +84,7 @@ System tools - Software programs included with or provided for an operating syst
 
 Centralised Repository - Single, central location where all the project’s code and files are stored, and all team members commit (upload) and pull (download) changes from this one place.
 
-
+ephemorous (short-lived) and stateless.
 ## Container Image 
 
 Container images are read-only templates a container runtime uses to create a running container, it holds everything needed to run an application.
