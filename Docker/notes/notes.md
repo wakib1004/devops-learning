@@ -74,6 +74,38 @@ It maps a folder on the host to a directory inside the container.
 
 ## Docker Compose
 
+### YAML file format
+
+YAML is a way to serialize data so it's readable by humans.
+It is used by Docker compose and Kubernetes.
+
+```yaml
+
+key: value
+a_number_value: 100  # Note the space after the colon!
+
+#Standard practice is 2 spaces for indentation
+a_nested_map:
+  key: value
+  another_key: Another Value
+  another_nested_map:
+    hello: hello
+
+#Lists are defined using a dash - followed by a space.
+a_sequence:
+  - Item 1
+  - Item 2
+
+```
+YAML Lint can be used for flagging errors in your YAML.
+
+### Docker Compose Cheat Sheet
+
+### Compose V2 - New Commands
+
+
+---
+
 ## Definitions 
 
 Runtime - what exceutes the program after it has been written.
