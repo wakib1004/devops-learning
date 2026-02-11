@@ -49,6 +49,41 @@ Docker is a platform that provides:
 - Command line tool (to create and manage containers)
 - "Dockerfile" file format for building container images.
 
+## Docker basic commands
+
+### Running and stopping
+
+| Command | Description
+| :--- | :--- |
+| docker pull [imageName] | Pulls image from registry |
+| docker run [imageName] -d | Run containers (detached mode) | 
+| docker start [containerName] | Start stopped containers | 
+| docker ps | List running containers |
+| docker ps -a | List running and stopped containers | 
+| docker stop [containerName] | Stop containers | 
+| docker rm [containerName] | Remove containers  | 
+| docker kill [containerName] | Kill containers | 
+| docker image inspect [imageName] | Get image info | 
+
+### How to write a dockerfile
+
+```dockerfile
+
+# 1) Base image - Always start with an already existing image
+FROM ubuntu:latest
+
+# 2) Copy a script from your project into the image
+COPY hello.sh /hello.sh
+
+# 3) Run this command during the build
+RUN chmod +x /hello.sh
+
+# 4) Default command when the container runs. 
+CMD ["/hello.sh"]
+
+#For command like echo "Hello", it would be CMD ["echo", "Hello"]
+
+```
 
 ---
 
@@ -121,6 +156,8 @@ services:
     restart: always
 
 ```
+
+### FEATURES
 
 ### Docker Compose Cheat Sheet
 
