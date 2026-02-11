@@ -4,7 +4,7 @@
 
 
 ## Containers
-A container is a unit of deployment that includes everything needed to run an application, such as the compiled code, runtime, system libraries and system tools.
+A container is a unit of software that includes everything needed to run an application, such as the compiled code, runtime, system libraries and system tools.
 
 **Why use Containers**
 
