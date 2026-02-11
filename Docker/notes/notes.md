@@ -61,9 +61,42 @@ Docker is a platform that provides:
 | docker ps | List running containers |
 | docker ps -a | List running and stopped containers | 
 | docker stop [containerName] | Stop containers | 
-| docker rm [containerName] | Remove containers  | 
+| docker images | Lists images  | 
 | docker kill [containerName] | Kill containers | 
 | docker image inspect [imageName] | Get image info | 
+
+### Attach a shell to the container
+
+| Command | Description
+| :--- | :--- |
+| docker run -it [imageName] /bin/bash | Attaches a shell |
+| docker container exec -it [containerName] bash| Attaches a shell to a running container|
+
+### Cleaning up 
+
+| Command | Description
+| :--- | :--- |
+| docker rm [containerName] | Removes container |
+| docker rm $(docker ps -a -q) | Removes all stopped containers | 
+| docker rmi [imageName] | Deletes the image |
+| docker system prune -a | Deletes all images not in use by any containers |
+
+### Building 
+
+| Command | Description
+| :--- | :--- |
+| docker build -t [name:tag] . | Builds an image using Dockerfile located in the same folder |
+| docker build -t [name:tag] -f [fileName] | Builds an image using Dockerfile located in a different folder |
+| docker tag [imageName] [name:tag] | Tag an existing image | 
+
+### Limits on what Container can use
+
+| Command | Description
+| :--- | :--- |
+| docker run --memory="256m" nginx | Max memory |
+| docker run --cpus=".5" nginx | Max CPU | 
+
+
 
 ### How to write a dockerfile
 
