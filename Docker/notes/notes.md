@@ -30,14 +30,6 @@ A virtual machine (VM) is a software-based computer that runs inside a real comp
 | Ideal for long running tasks | Ideal for short lived tasks | 
 |  | Portable (can run same way everywhere) | 
 
-## Container Registry 
-
-A centralised container repository where you deploy the container images (Like Github but for containers)
-
-Docker has one called Docker Hub which provides public and private repositories
-
-All major cloud providers (AWS, Azure, Google Cloud) have a container registry.
-
 ---
 
 ## What is Docker
@@ -217,6 +209,35 @@ services:
 | docker compose cp [SRC_PATH] [containerID]:[DEST_PATH] | copy files to the container |
 
 ---
+
+## Container Registry
+
+A centralised container repository where you deploy or pull container images (Like Github but for containers)
+Think of it like:
+📁 One shared folder on a company server
+
+Docker has one called Docker Hub which provides public and private repositories
+
+All major cloud providers (AWS, Azure, Google Cloud) have a container registry. 
+- Benefit of using repository from your cloud provider is that images are located near your app so no hops over the internet 
+to retrieve images.
+
+```docker
+
+# Login to Docker Hub
+docker login -u <username> -p <password>
+
+# Tag a previously built image
+docker tag image:latest wakib705/image:latest
+
+# Push the image to Docker Hub
+docker push wakib705/image:v1
+
+# Pull the image from Docker Hub
+docker pull wakib705/image:v1
+
+```
+
 
 ## Definitions 
 
