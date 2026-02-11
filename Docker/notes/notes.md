@@ -74,6 +74,8 @@ It maps a folder on the host to a directory inside the container.
 
 ## Docker Compose
 
+Docker Compose allows you to define and run multi containers applications using a single YAML file.
+
 ### YAML file format
 
 YAML is a way to serialize data so it's readable by humans.
@@ -99,10 +101,50 @@ a_sequence:
 ```
 YAML Lint can be used for flagging errors in your YAML.
 
+### Docker compose file
+
+```yaml
+
+version: '3.9'   # Optional (defines compose file version)
+
+services:
+  webapi1:                     # Container name (hostname inside network)
+    image: academy.azurecr.io/webapi1   # Image location
+    ports:
+      - '8081:80'              # Host:Container port (Listening port)
+    restart: always
+
+  webapi2: #Second container 
+    image: academy.azurecr.io/webapi2
+    ports:
+      - '8082:80'
+    restart: always
+
+```
+
 ### Docker Compose Cheat Sheet
+
+| Command | Description
+| :--- | :--- |
+| docker compose build | Builds the image |
+| docker compose start | Starts the containers | 
+| docker compose stop | Stops the containers | 
+| docker compose up -d | Build and start |
+| docker compose ps | List what's running | 
+| docker compose rm | Remove from memory |  
+| docker compose down | Stop and remove | 
+| docker compose logs | Get the logs |
+| docker compose exec [container] bash | Run a command in a container | 
 
 ### Compose V2 - New Commands
 
+| Command | Description
+| :--- | :--- |
+| docker compose --project-name test1 up -d | Run an instance as a project |
+| docker compose -p test2 up -d | Shortcut for the one  above | 
+| docker compose ls | List running projects | 
+| docker compose cp [containerID]:[SRC_PATH]:[DEST_PATH] | copy files from the container |
+| docker compose cp [SRC_PATH] [containerID]:[DEST_PATH] | copy files to the container |
 
 ---
 
