@@ -133,11 +133,7 @@ ENTRYPOINT ["node", "./app.js"]
 
 ## Multi-stage builds for production
 
-Multi‑stage build is a way to write Dockerfiles so that instead of building everything in a single image, you split the build into multiple stages and only include what’s required in the final image.
-
-Benefits of Multi-stage builds:
-- Reduced final image size
-- Higher security #explanation
+Multi‑stage build is a way to write Dockerfiles so that instead of building everything in a single image, you split the build into multiple stages and only include what’s required in the final image, reducing its size.
 
 An example
 ```dockerfile
@@ -163,7 +159,9 @@ CMD ["./myapp"]
 
 Distroless image is a minimalistic image that will hardly have any packages except what is required. For example: a python distroless image would only have a python runtime.
 
-They can be found on Github.
+Benefit - Higher security (for example: compared to python runtime images, these only have python runtime, so it doesn't even have basic shell commands like find, ls and curl, so unlikely to be exposed security threats that are related to OS vulnerabilities)
+
+The distroless images can be found on Github.
 
 ---
 
