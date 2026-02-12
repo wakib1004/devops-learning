@@ -110,6 +110,61 @@ CMD ["/hello.sh"]
 
 ```
 
+### Second Example - Node site
+
+```docker
+
+FROM alpine
+RUN apk add -update nodejs nodejs-npm
+COPY . /src
+WORKDIR /src
+RUN npm install
+#Listen at port 8080
+EXPOSE 8080
+#Command to run at starting
+ENTRYPOINT ["node", "./app.js"] 
+
+```
+
+
+
+
+---
+
+## Multi-stage builds for production
+
+Multi‑stage build is a way to write Dockerfiles so that instead of building everything in a single image, you split the build into multiple stages and only include what’s required in the final image.
+
+Benefits of Multi-stage builds:
+- Reduced final image size
+- Higher security #explanation
+
+An example
+```dockerfile
+
+# Stage 1: Build
+#AS builder - gives this stage the name "builder" so we can refer back to it later.
+FROM golang:1.25 AS builder
+WORKDIR /app
+COPY . .
+#Compiles the binary from the code
+RUN go build -o myapp 
+
+# Stage 2: Production
+#Starts with a very lightweight base image 
+FROM alpine:latest
+#Copies only the binary that was compiled in the build stage to this image
+COPY --from=builder /app/myapp . 
+CMD ["./myapp"]
+
+```
+
+### Distroless image 
+
+Distroless image is a minimalistic image that will hardly have any packages except what is required. For example: a python distroless image would only have a python runtime.
+
+They can be found on Github.
+
 ---
 
 ## **Volumes**
