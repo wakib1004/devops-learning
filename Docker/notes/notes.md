@@ -90,7 +90,11 @@ Docker is a platform that provides:
 
 
 
-### How to write a dockerfile
+## Dockerfile
+
+A Dockerfile is a text file containing a set of instructions that tell Docker how to build an image.
+
+An example: 
 
 ```dockerfile
 
@@ -125,9 +129,6 @@ EXPOSE 8080
 ENTRYPOINT ["node", "./app.js"] 
 
 ```
-
-
-
 
 ---
 
@@ -235,7 +236,16 @@ services:
 
 ```
 
-### FEATURES
+## FEATURES
+
+### Networking 
+
+```yaml
+
+
+
+```
+
 
 ### Docker Compose Cheat Sheet
 
