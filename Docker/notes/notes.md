@@ -225,7 +225,7 @@ services:
   webapi1:                     # Container name (hostname inside network)
     image: academy.azurecr.io/webapi1   # Image location
     ports:
-      - '8081:80'              # Host:Container port (Listening port)
+      - '8081:80'              # Accesibility from outside port: Container port (Listening inside docker network on this port)
     restart: always
 
   webapi2: #Second container 
@@ -240,12 +240,84 @@ services:
 
 ### Networking 
 
+By default, code running within one container can communicate with another using the host names. (service names)
+
+**Restricting who sees who**
+
 ```yaml
 
+services:
+  proxy:
+    image: nginx
+    networks:
+      - frontend # Can only communicate with the 'app' service
 
+  app:
+    image: myapp
+    networks:
+      - frontend # Can communicate with 'proxy'
+      - backend  # Can communicate with 'db'
+
+  db:
+    image: postgres
+    networks:
+      - backend # Isolated: Only accessible by 'app', invisible to 'proxy'
+
+# Splitting the network into frontend and backend 
+networks:
+  frontend:
+  backend:
+
+```
+### docker compose volumes
+
+**Named Volumes** can be shared across services
+
+```yaml
+
+services:
+  db:
+    image: postgres
+# Use like this 
+    volumes:
+      # [Volume Name] : [Path inside container]
+      - db-data:/var/lib/postgresql/data
+
+# MUST be defined at the top level
+volumes:
+  db-data:
 
 ```
 
+**Mapping without using named volumes**
+
+```yaml
+
+services:
+  db:
+    image: postgres
+    volumes:
+      # [Host Path] : [Container Path]
+      - ./db:/usr/src/app
+
+```
+
+### Dependance 
+
+```yaml
+
+services:
+  app:
+    image: myapp
+    # This ensures 'db' starts before 'app' starts.
+    depends_on:
+      - db 
+  db:
+    image: postgres
+    networks:
+      - back-tier
+
+```
 
 ### Docker Compose Cheat Sheet
 
