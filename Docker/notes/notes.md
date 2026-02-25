@@ -1,6 +1,10 @@
 # Docker Notes
 
 ## Table of contents 
+- [Containers](#containers)
+- [What is Docker?](#what-is-docker)
+- [Docker basic commands](#docker-basic-commands)
+- 
 - [Volumes](#volumes)
 
 ## Containers
