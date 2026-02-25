@@ -4,7 +4,9 @@
 - [Containers](#containers)
 - [What is Docker?](#what-is-docker)
 - [Docker basic commands](#docker-basic-commands)
-- 
+- [Dockerfile](#dockerfile)
+- [Multi stage builds for production](#multi-stage-builds-for-production)
+- [Volumes](#volumes)
 - [Volumes](#volumes)
 
 ## Containers
@@ -110,7 +112,7 @@ COPY hello.sh /hello.sh
 
 # 3) Run this command during the build
 RUN chmod +x /hello.sh
-
+-
 # 4) Default command when the container runs. 
 CMD ["/hello.sh"]
 
