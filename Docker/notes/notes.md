@@ -7,7 +7,9 @@
 - [Dockerfile](#dockerfile)
 - [Multi stage builds for production](#multi-stage-builds-for-production)
 - [Volumes](#volumes)
-- [Volumes](#volumes)
+- [Docker compose](#docker-compose)
+- [Container Registry](#container-registry)
+
 
 ## Containers
 A container is a unit of software that includes everything needed to run an application, such as the compiled code, runtime, system libraries and system tools.
