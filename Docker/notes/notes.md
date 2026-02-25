@@ -2,12 +2,15 @@
 
 ## Table of contents 
 - [Containers](#containers)
+- [VMs vs Containers](#vms-vs-containers)
+- [What is a Container Image](#container-image)
 - [What is Docker?](#what-is-docker)
 - [Docker basic commands](#docker-basic-commands)
 - [Dockerfile](#dockerfile)
 - [Multi stage builds for production](#multi-stage-builds-for-production)
 - [Volumes](#volumes)
-- [Docker compose](#docker-compose)
+- [Docker Compose](#docker-compose)
+- [Docker Compose Cheat Sheet](#docker-compose-cheat-sheet)
 - [Container Registry](#container-registry)
 
 
@@ -23,13 +26,12 @@ A container is a unit of software that includes everything needed to run an appl
 5. Portability
 6. Isolation (If one fails, it will not take the whole system down with it)
 
+## VMs vs Containers
 
 **Virtual Machines**
 A virtual machine (VM) is a software-based computer that runs inside a real computer, with its own operating system and apps.
 
-## VMs vs Containers
-
-### Comparasion Table
+### Comparison Table
 
 | Virtual Machine | Container
 | :--- | :--- |
@@ -40,6 +42,12 @@ A virtual machine (VM) is a software-based computer that runs inside a real comp
 
 ---
 
+## Container Image 
+
+Container images are read-only templates a container runtime uses to create a running container, it holds everything needed to run an application.
+
+---
+
 ## What is Docker
 
 Docker is a platform that provides:
@@ -47,7 +55,7 @@ Docker is a platform that provides:
 - An open source container runtime
 - Mac, Windows and Linux support
 - Command line tool (to create and manage containers)
-- "Dockerfile" file format for building container images.
+- Uses Dockerfile format as the instruction set for building container images.
 
 ## Docker basic commands
 
@@ -246,6 +254,27 @@ services:
 
 ## FEATURES
 
+### Resource Allocation
+
+```yaml
+
+services:
+  webapp:
+    image: my-python-app:latest
+    deploy:
+      resources:
+        # The maximum amount the container is allowed to use
+        limits:
+          cpus: '1.0' 
+          memory: 512M # 512 Megabytes of RAM
+        # The amount guaranteed to the container at startup
+        reservations:
+          cpus: '0.50'
+          memory: 128M
+
+```
+
+
 ### Networking 
 
 By default, code running within one container can communicate with another using the host names. (service names)
@@ -277,7 +306,7 @@ networks:
   backend:
 
 ```
-### docker compose volumes
+### Docker Compose Volumes
 
 **Named Volumes** can be shared across services
 
@@ -327,7 +356,56 @@ services:
 
 ```
 
-### Docker Compose Cheat Sheet
+### Environment variables
+
+To set environment variables that will be used in the running instance 
+
+```yaml
+
+services:
+  web:
+    image: nginx:alpine
+    environment:
+      - APP_COLOR=blue     # [Key]=[Value]
+      - VERSION=1.0
+```
+
+These values can be overridden in the CLI using: `docker compose up -d -e [Varible]=[NewValue]`
+
+**To use variables in the yaml file, do this:**
+
+Make a .env file within the same folder and declare the variables there like this: 
+Key=Value
+
+```yaml 
+services:
+  db:
+    image: "postgres:${VERSION}" # ${variable-name} can then be used to access the variable
+
+```
+You can also declare the variables within the terminal:
+`export [key]=[value]`
+
+### Restart Policy 
+
+This is useful if you need to restart the server, as if you don't specify restart policy, by default a container does not restart.
+
+```yaml
+
+services:
+  db:
+    image: postgres
+    restart: unless-stopped #Example
+
+```
+
+- always - always restarts the container untill its removal but not when it is stopped manually but if the daemon restarts then container restarts even if it was stopped before.
+- on-failure - restarts a container if the exit code indicates error
+- unless-stopped - restarts unless container is stopped or removed
+
+---
+
+## Docker Compose Cheat Sheet
 
 | Command | Description
 | :--- | :--- |
@@ -381,7 +459,6 @@ docker pull wakib705/image:v1
 
 ```
 
-
 ## Definitions 
 
 Runtime - what exceutes the program after it has been written.
@@ -392,8 +469,6 @@ System tools - Software programs included with or provided for an operating syst
 
 Centralised Repository - Single, central location where all the project’s code and files are stored, and all team members commit (upload) and pull (download) changes from this one place.
 
-ephemorous (short-lived) and stateless.
-## Container Image 
+ephemorous - short-lived
 
-Container images are read-only templates a container runtime uses to create a running container, it holds everything needed to run an application.
 
