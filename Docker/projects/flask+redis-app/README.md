@@ -6,15 +6,8 @@
 ## Demo GIF:
 ![chrome_Ddtw2DFn57-ezgif com-video-to-gif-converter](https://github.com/user-attachments/assets/dc81382b-14ff-4b73-bbd7-c09ceebb243a)
 
-
-
-
-
-
-
-A simple Flask web application using Redis for caching, containerized with Docker and Docker Compose.
-The Flask application handles HTTP requests and stores or retrieves data regarding the number of visits to the page from Redis.
-Data persists across container restarts using a Docker volume.
+A containerized Flask web application that shows number of page visits, using Redis as a database to store the visit counter.
+The project demonstrates a multi-container architecture using Docker Compose, running the Flask application and Redis in separate containers. Data persistence is handled through a Docker volume to ensure state is maintained across container restarts.
 
 ---
 
