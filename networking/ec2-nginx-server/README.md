@@ -54,4 +54,25 @@ If you visit the public IP address of your EC2 instance in the browser, you shou
 
 Purchase a domain from CloudFlare
 
-### 5. 
+### 5. 🌍 Cloudflare Domain Setup
+
+Go to Cloudflare Dashboard → Your Domain → DNS → Add Records:
+
+| Record | Type | Value | TTL |
+|--------|------|--------|-----|
+| `@` | A | `???` | 300 |
+
+Proxy status: DNS only (or Proxied if desired) --> What is proxy?
+
+
+
+
+
+## Notes on Costs
+
+| Service | Est. Cost | Notes |
+|----------|------------|-------|
+| EC2 (t2.micro) | Free Tier | Charged hourly after limit |
+|  | |  |
+| DNS queries |  |  |
+
