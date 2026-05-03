@@ -4,6 +4,8 @@ Deployed a NGINX web server on AWS EC2 and configured DNS (A record) to serve a 
 
 ![Demo](Nginx.gif)
 
+---
+
 ## 📌 Overview
 
 This project covers:
@@ -16,6 +18,7 @@ Deploying a website
 
 Connecting a Cloudflare domain to EC2
 
+--- 
 
 ## 🧰 Tech Stack
 AWS EC2 – Virtual server hosting
@@ -25,6 +28,8 @@ Ubuntu 24.04 LTS – Operating system
 NGINX – Web server
 
 Cloudflare – Domain & DNS management
+
+--- 
 
 ## 🚀 Setup Instructions
 
@@ -36,7 +41,7 @@ Cloudflare – Domain & DNS management
 - Configure Security Group:
   - Allow:
     - SSH (22)
-    -HTTP (80)
+    - HTTP (80)
 - Download .pem key pair
 
 ### 2. Connect to EC2
@@ -62,11 +67,13 @@ Go to Cloudflare Dashboard → Your Domain → DNS → Add Records:
 |--------|------|--------|-----|
 | `@` | A | `???` | 300 |
 
-Proxy status: DNS only (or Proxied if desired) --> What is proxy?
+Proxy status: DNS only
 
 
 
 
+
+---
 
 ## Notes on Costs
 
