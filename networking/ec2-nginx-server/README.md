@@ -12,15 +12,13 @@ Deployed a NGINX web server on AWS EC2 and configured DNS (A record) to serve a 
 
 ## 📌 Overview
 
-This project covers:
+- Launching an AWS EC2 instance (Ubuntu 24)
 
-Launching an AWS EC2 instance (Ubuntu 24)
+- Installed and ran NGINX
 
-Installing and running NGINX
+- Deployed a static website
 
-Deploying a website
-
-Connecting a Cloudflare domain to EC2
+- Connected a custom domain via Cloudflare DNS
 
 --- 
 
@@ -70,7 +68,7 @@ sudo apt update
 sudo apt install nginx
 sudo systemctl status nginx # should show "active (running)"
 ```
-If you visit the public IP address of your EC2 instance in the browser, you should now see the NGINX default welcome page.
+Visit the instance’s public IP in your browser to verify the default NGINX page is running.
 
 ### 4. Register a Domain
 
