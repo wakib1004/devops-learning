@@ -1,5 +1,9 @@
 # NGINX Web Server on AWS EC2 with Custom Domain
 
+[![AWS EC2](https://img.shields.io/badge/AWS-EC2-232F3E?logo=amazonaws)](https://aws.amazon.com/ec2/)
+[![Nginx](https://img.shields.io/badge/Nginx-Web%20Server-009639?logo=nginx)](https://nginx.org/)
+[![Cloudflare](https://img.shields.io/badge/Cloudflare-CDN-F38020?logo=cloudflare)](https://www.cloudflare.com/)
+
 Deployed a NGINX web server on AWS EC2 and configured DNS (A record) to serve a custom domain using CloudFlare.
 
 ![Demo](Nginx.gif)
@@ -117,6 +121,5 @@ This highlighted that public IP addresses in Amazon Web Services EC2 are dynamic
 | Service | Est. Cost | Notes |
 |----------|------------|-------|
 | EC2 (t2.micro) | Free Tier | Charged hourly after limit |
-|  | |  |
-| DNS queries |  |  |
+| Cloudflare | $5.30/year | DNS charge |
 
