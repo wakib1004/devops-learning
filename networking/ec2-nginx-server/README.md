@@ -4,7 +4,9 @@
 [![Nginx](https://img.shields.io/badge/Nginx-Web%20Server-009639?logo=nginx)](https://nginx.org/)
 [![Cloudflare](https://img.shields.io/badge/Cloudflare-CDN-F38020?logo=cloudflare)](https://www.cloudflare.com/)
 
-Deployed a NGINX web server on AWS EC2 and configured DNS (A record) to serve a custom domain using CloudFlare.
+Deployed a NGINX web server on AWS EC2 and configured DNS (A record) to serve a custom domain using Cloudflare.
+
+## 🎬 Demo
 
 ![Demo](Nginx.gif)
 
@@ -85,7 +87,7 @@ Set Proxy status to "proxied"
 
 ### 1. NGINX not accessible via public IP
 
-**Problem:** The NGINX server was running, but the site was not reachable via the EC2 public IP address.
+**Problem:** NGINX was running, but the site was unreachable via the public IP.
 
 **Cause:** Port 80 was opened using UFW on the instance, but not allowed in the AWS security group.
 
