@@ -36,8 +36,9 @@ Cloudflare – Domain & DNS management
 ### 1. Launch EC2 Instance (Ubuntu 24)
 - Go to AWS Console → EC2 → Launch Instance
 - Choose:
-  -Ubuntu Server 24.04 LTS
-  -Instance type: t2.micro (Free Tier eligible)
+  - Ubuntu Server 24.04 LTS (Free Tier)
+  - Instance type: t2.micro (Free Tier eligible)
+- Ensure "Auto-asign public IP" is enabled
 - Configure Security Group:
   - Allow:
     - SSH (22)
@@ -45,6 +46,8 @@ Cloudflare – Domain & DNS management
 - Download .pem key pair
 
 ### 2. Connect to EC2
+
+ssh -i <your key.pem> ubuntu@<your-ec2-public-dns>
 
 ### 3. Update System and Install NGINX
 
