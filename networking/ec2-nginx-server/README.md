@@ -13,23 +13,18 @@ Deployed a NGINX web server on AWS EC2 and configured DNS (A record) to serve a 
 ## 📌 Overview
 
 - Launching an AWS EC2 instance (Ubuntu 24)
-
 - Installed and ran NGINX
-
 - Deployed a static website
-
 - Connected a custom domain via Cloudflare DNS
 
 --- 
 
 ## 🧰 Tech Stack
-AWS EC2 – Virtual server hosting
 
-Ubuntu 24.04 LTS – Operating system
-
-NGINX – Web server
-
-Cloudflare – Domain & DNS management
+- **AWS EC2** – Virtual server hosting  
+- **Ubuntu 24.04 LTS** – Operating system  
+- **NGINX** – Web server  
+- **Cloudflare** – DNS management  
 
 --- 
 
