@@ -80,39 +80,35 @@ Go to Cloudflare Dashboard → Your Domain → DNS → Add Records:
 |--------|------|--------|-----|
 | `@` | A | `<Public IP-address of EC2 instance>` | 300 |
 
-Explanation?
-
-Proxy status: DNS only --> Explanataiona
+Set Proxy status to "proxied" 
 
 ---
+
 ## 🧠 Challenges & Learnings
 
-1. NGINX not accessible via public IP
+### 1. NGINX not accessible via public IP
 
-Problem: The NGINX server was running, but the site was not reachable via the EC2 public IP address.
+**Problem:** The NGINX server was running, but the site was not reachable via the EC2 public IP address.
 
-Cause: Port 80 was opened using UFW on the instance, but not allowed in the AWS security group.
+**Cause:** Port 80 was opened using UFW on the instance, but not allowed in the AWS security group.
 
-Solution: Updated the EC2 security group to allow inbound HTTP (port 80) traffic from 0.0.0.0/0.
+**Solution:** Updated the EC2 security group to allow inbound HTTP (port 80) traffic from 0.0.0.0/0.
 
-Key Insight:
+**Key Insight:**
+
 This issue reinforced the importance of checking cloud-level networking rules first. Even though I was aware that security groups in Amazon Web Services control inbound traffic, I initially focused on the instance-level firewall (UFW), which led to unnecessary debugging.
 
-**SEE IF THIS IS CORRECT IN FREE TIME if possible.**
+### 2. Domain stopped working after restarting EC2 instance
 
-2. Domain stopped working after restarting EC2 instance
+**Problem:** After stopping and restarting the EC2 instance, the custom domain no longer resolved correctly.
 
-Problem: After stopping and restarting the EC2 instance, the custom domain no longer resolved correctly.
+**Cause:** The public IP address of the EC2 instance changed, causing the DNS A record in Cloudflare to point to an outdated IP.
 
-Cause: The public IP address of the EC2 instance changed, causing the DNS A record in Cloudflare to point to an outdated IP.
+**Solution:** Updated the A record with the new public IP address of the instance.
 
-Solution: Updated the A record with the new public IP address of the instance.
+**Key Insight:**
 
-Key Insight:
 This highlighted that public IP addresses in Amazon Web Services EC2 are dynamic by default and can change when an instance is stopped and started. 
-
-**THIS PART SHOULD I ADD "For consistent domain mapping, an Elastic IP should be used to ensure a static address."**
-
 
 ---
 
