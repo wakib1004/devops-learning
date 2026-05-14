@@ -79,7 +79,7 @@ Go to Cloudflare Dashboard → Your Domain → DNS → Add Records:
 |--------|------|--------|-----|
 | `@` | A | `<Public IP-address of EC2 instance>` | 300 |
 
-Set Proxy status to "proxied" 
+- Set Proxy status to "DNS only", since the other option which provides extra security was not resolving the domain. 
 
 ---
 
