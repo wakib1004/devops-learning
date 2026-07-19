@@ -16,7 +16,7 @@ Create a security group named **`A2-ALB-SG`** with the following inbound rule:
 
 This allows HTTP traffic from the internet to reach the Application Load Balancer.
 
-> **📸 Screenshot:** `A2-ALB-SG` inbound rules.
+![](screenshots/A2-ALB-SG.PNG)
 
 ---
 
@@ -30,7 +30,7 @@ Create another security group named **`A2-EC2-SG`** with the following inbound r
 
 This configuration ensures that the EC2 instances only accept HTTP traffic from the Application Load Balancer, rather than directly from the internet.
 
-> **📸 Screenshot:** `A2-EC2-SG` inbound rules showing `A2-ALB-SG` as the source.
+![](screenshots/A2-EC2-SG.PNG)
 
 ---
 
@@ -45,7 +45,7 @@ Launch two Amazon EC2 instances using the **`A2-EC2-SG`** security group.
 
 Each instance uses a User Data script to automatically install the Apache web server and create a simple webpage displaying the instance name. This makes it easy to verify that traffic is being distributed correctly by the load balancer.
 
-> **📸 Screenshot:** EC2 Instances page showing both instances running in separate Availability Zones.
+
 
 ---
 
