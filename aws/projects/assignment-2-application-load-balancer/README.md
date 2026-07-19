@@ -38,10 +38,10 @@ This configuration ensures that the EC2 instances only accept HTTP traffic from 
 
 Launch two Amazon EC2 instances using the **`A2-EC2-SG`** security group.
 
-| Instance Name | Availability Zone | Security Group |
-|---------------|-------------------|----------------|
-| `A2-EC2-1` | `eu-north-1a` | `A2-EC2-SG` |
-| `A2-EC2-2` | `eu-north-1b` | `A2-EC2-SG` |
+| Instance Name | Availability Zone | 
+|---------------|-------------------|
+| `A2-EC2-1` | `eu-north-1a` |
+| `A2-EC2-2` | `eu-north-1b` |
 
 Each instance uses a User Data script to automatically install the Apache web server and create a simple webpage displaying the instance name. This makes it easy to verify that traffic is being distributed correctly by the load balancer.
 
@@ -78,4 +78,32 @@ This creates a unique webpage on each instance, allowing you to identify which E
 > **📸 Screenshot:** User Data section during EC2 instance creation.
 
 ---
+
+## Step 4 – Create a Target Group
+
+Create a target group named **`A2-TG`**.
+
+Configure the target group with the following settings:
+
+| Setting | Value |
+|---------|-------|
+| Target Type | Instances |
+| Protocol | HTTP |
+| Port | 80 |
+| VPC | Your project VPC |
+| Health Check Path | `/` |
+
+After creating the target group, register both EC2 instances:
+
+- `A2-EC2-1`
+- `A2-EC2-2`
+
+The health check on the root path (`/`) verifies that the Apache web server is running and responding successfully on each instance.
+
+![](screenshots/A2-TG.PNG)
+
+> **📸 Screenshot:** Health Check configuration with the path set to `/`.
+
+---
+
 
