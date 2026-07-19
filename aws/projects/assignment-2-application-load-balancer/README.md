@@ -45,7 +45,7 @@ Launch two Amazon EC2 instances using the **`A2-EC2-SG`** security group.
 
 Each instance uses a User Data script to automatically install the Apache web server and create a simple webpage displaying the instance name. This makes it easy to verify that traffic is being distributed correctly by the load balancer.
 
-
+![](screenshots/A2-EC2s-Running.PNG)
 
 ---
 
