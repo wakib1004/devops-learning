@@ -124,11 +124,11 @@ Next, configure an HTTP listener:
 |----------|--------|
 | HTTP (Port 80) | Forward requests to `A2-TG` |
 
-This configuration enables the Application Load Balancer to receive HTTP requests from clients and distribute traffic evenly between the registered EC2 instances.
-
 ![](screenshots/A2-ALB.PNG)
 
 ![](screenshots/A2-ALB-SG-Attached.PNG)
+
+This configuration enables the Application Load Balancer to receive HTTP requests from clients and distribute traffic evenly between the registered EC2 instances.
 
 ---
 
