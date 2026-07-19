@@ -1,12 +1,12 @@
 # AWS Application Load Balancer: A Highly Available, Auto-Scaling Web Tier
 
 ---
-### Setup Instructions
+## Setup Instructions
 ---
 
-## Step 1 – Create Security Groups
+### Step 1 – Create Security Groups
 
-### Create the Application Load Balancer Security Group
+#### Create the Application Load Balancer Security Group
 
 Create a security group named **`A2-ALB-SG`** with the following inbound rule:
 
@@ -20,7 +20,7 @@ This allows HTTP traffic from the internet to reach the Application Load Balance
 
 ---
 
-### Create the EC2 Security Group
+#### Create the EC2 Security Group
 
 Create another security group named **`A2-EC2-SG`** with the following inbound rule:
 
@@ -34,7 +34,7 @@ This configuration ensures that the EC2 instances only accept HTTP traffic from 
 
 ---
 
-## Step 2 – Launch the EC2 Instances
+### Step 2 – Launch the EC2 Instances
 
 Launch two Amazon EC2 instances using the **`A2-EC2-SG`** security group.
 
@@ -49,9 +49,9 @@ Each instance uses a User Data script to automatically install the Apache web se
 
 ---
 
-## Step 3 – Configure User Data
+### Step 3 – Configure User Data
 
-### User Data for `A2-EC2-1`
+#### User Data for `A2-EC2-1`
 
 ```bash
 #!/bin/bash
@@ -65,7 +65,7 @@ systemctl enable httpd
 echo "<h1>A2-EC2-1</h1>" > /var/www/html/index.html
 ```
 
-### User Data for `A2-EC2-2`
+#### User Data for `A2-EC2-2`
 
 Use the same script, but replace the final line with:
 
@@ -79,7 +79,7 @@ This creates a unique webpage on each instance, allowing you to identify which E
 
 ---
 
-## Step 4 – Create a Target Group
+### Step 4 – Create a Target Group
 
 Create a target group named **`A2-TG`**.
 
@@ -103,6 +103,32 @@ The health check on the root path (`/`) verifies that the Apache web server is r
 ![](screenshots/A2-TG.PNG)
 
 > **📸 Screenshot:** Health Check configuration with the path set to `/`.
+
+### Step 5 – Create the Application Load Balancer
+
+Create an Application Load Balancer named **`A2-ALB`**.
+
+Configure it with the following settings:
+
+| Setting | Value |
+|---------|-------|
+| Scheme | Internet-facing |
+| Type | Application Load Balancer |
+| IP Address Type | IPv4 |
+| Availability Zones | Two public subnets across two Availability Zones |
+| Security Group | `A2-ALB-SG` |
+
+Next, configure an HTTP listener:
+
+| Listener | Action |
+|----------|--------|
+| HTTP (Port 80) | Forward requests to `A2-TG` |
+
+This configuration enables the Application Load Balancer to receive HTTP requests from clients and distribute traffic evenly between the registered EC2 instances.
+
+![](screenshots/A2-ALB.PNG)
+
+![](screenshots/A2-ALB-SG-Attached.PNG)
 
 ---
 
