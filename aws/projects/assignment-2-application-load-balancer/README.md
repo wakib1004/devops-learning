@@ -106,30 +106,38 @@ The health check on the root path (`/`) verifies that the Apache web server is r
 
 ### Step 5 – Create the Application Load Balancer
 
-Create an Application Load Balancer named **`A2-ALB`**.
-
-Configure it with the following settings:
-
-| Setting | Value |
-|---------|-------|
-| Scheme | Internet-facing |
-| Type | Application Load Balancer |
-| IP Address Type | IPv4 |
-| Availability Zones | Two public subnets across two Availability Zones |
-| Security Group | `A2-ALB-SG` |
-
-Next, configure an HTTP listener:
-
-| Listener | Action |
-|----------|--------|
-| HTTP (Port 80) | Forward requests to `A2-TG` |
+An internet-facing Application Load Balancer named **`A2-ALB`** across two public subnets in two different Availability Zones, ensuring a load balancer node is placed in each zone
 
 ![](screenshots/A2-ALB.PNG)
+
+Two public subnets in different Availability Zones are required for an ALB as this ensures high availability.
+
 
 ![](screenshots/A2-ALB-SG-Attached.PNG)
 
 This configuration enables the Application Load Balancer to receive HTTP requests from clients and distribute traffic evenly between the registered EC2 instances.
 
 ---
+
+### Step 6 – Test Load Balancing
+
+Once the Application Load Balancer has finished provisioning, copy its **DNS name** and open the DNS name in your web browser.
+
+Make sure that the request is sent using HTTP if the browser defaults to HTTPS
+
+Refresh the page several times and you should see the response alternate between:
+
+```text
+A2-EC2-1 and A2-EC2-2
+```
+
+![](screenshots/Testing-1.PNG)
+
+![](screenshots/Testing-2.PNG)
+
+This confirms that the Application Load Balancer is successfully distributing incoming requests across both EC2 instances.
+
+---
+
 
 
