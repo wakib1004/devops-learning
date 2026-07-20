@@ -1,57 +1,27 @@
 # AWS Application Load Balancer: A Highly Available, Auto-Scaling Web Tier
 
----
+
 ## Setup Instructions
----
 
 ### Step 1 – Create Security Groups
 
-#### Create the Application Load Balancer Security Group
+Two security groups: 
 
-Create a security group named **`A2-ALB-SG`** with the following inbound rule:
-
-| Type | Protocol | Port | Source |
-|------|----------|------|--------|
-| HTTP | TCP | 80 | `0.0.0.0/0` |
-
-This allows HTTP traffic from the internet to reach the Application Load Balancer.
+- `A2-ALB-SG` – Allows inbound HTTP (port 80) traffic from 0.0.0.0/0, enabling public access to the load balancer over the internet.
+- `A2-EC2-SG` – Security group for the EC2 instances, configured to allow inbound HTTP (port 80) traffic only from `A2-ALB-SG`
 
 ![](screenshots/A2-ALB-SG.PNG)
 
----
-
-#### Create the EC2 Security Group
-
-Create another security group named **`A2-EC2-SG`** with the following inbound rule:
-
-| Type | Protocol | Port | Source |
-|------|----------|------|--------|
-| HTTP | TCP | 80 | `A2-ALB-SG` |
-
-This configuration ensures that the EC2 instances only accept HTTP traffic from the Application Load Balancer, rather than directly from the internet.
-
 ![](screenshots/A2-EC2-SG.PNG)
+
+`A2-EC2-SG` ensures that the instances only accept HTTP traffic from the Application Load Balancer, rather than directly from the internet.
 
 ---
 
 ### Step 2 – Launch the EC2 Instances
 
-Launch two Amazon EC2 instances using the **`A2-EC2-SG`** security group.
-
-| Instance Name | Availability Zone | 
-|---------------|-------------------|
-| `A2-EC2-1` | `eu-north-1a` |
-| `A2-EC2-2` | `eu-north-1b` |
-
-Each instance uses a User Data script to automatically install the Apache web server and create a simple webpage displaying the instance name. This makes it easy to verify that traffic is being distributed correctly by the load balancer.
-
-![](screenshots/A2-EC2s-Running.PNG)
-
----
-
-### Step 3 – Configure User Data
-
-#### User Data for `A2-EC2-1`
+Launch two Amazon EC2 instances using the `A2-EC2-SG` security group, with one instance in `eu-north-1a` AZ and the other in `eu-north-1b` AZ,
+using the following User Data for both except changing the last line:
 
 ```bash
 #!/bin/bash
@@ -65,21 +35,23 @@ systemctl enable httpd
 echo "<h1>A2-EC2-1</h1>" > /var/www/html/index.html
 ```
 
-#### User Data for `A2-EC2-2`
-
-Use the same script, but replace the final line with:
+For the other instance, change last line to the following 
 
 ```bash
 echo "<h1>A2-EC2-2</h1>" > /var/www/html/index.html
 ```
 
-This creates a unique webpage on each instance, allowing you to identify which EC2 instance is serving requests during load balancing.
+Each instance uses a User Data script to automatically install the Apache web server and create a simple webpage displaying the instance name. This makes it easy to verify that traffic is being distributed correctly by the load balancer.
 
-> **📸 Screenshot:** User Data section during EC2 instance creation.
+![](screenshots/A2-EC2s-Running.PNG)
+
+![](screenshots/A2-EC2-1-UD.PNG)
+
+![](screenshots/A2-EC2-2-UD.PNG)
 
 ---
 
-### Step 4 – Create a Target Group
+### Step 3 – Create a Target Group
 
 Create a target group named **`A2-TG`**.
 
@@ -104,7 +76,7 @@ The health check on the root path (`/`) verifies that the Apache web server is r
 
 > **📸 Screenshot:** Health Check configuration with the path set to `/`.
 
-### Step 5 – Create the Application Load Balancer
+### Step 4 – Create the Application Load Balancer
 
 An internet-facing Application Load Balancer named **`A2-ALB`** across two public subnets in two different Availability Zones, ensuring a load balancer node is placed in each zone
 
@@ -119,7 +91,7 @@ This configuration enables the Application Load Balancer to receive HTTP request
 
 ---
 
-### Step 6 – Test Load Balancing
+### Step 5 – Test Load Balancing
 
 Once the Application Load Balancer has finished provisioning, copy its **DNS name** and open the DNS name in your web browser.
 
