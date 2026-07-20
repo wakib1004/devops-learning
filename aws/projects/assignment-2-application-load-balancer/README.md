@@ -1,5 +1,11 @@
 # AWS Application Load Balancer: A Highly Available, Auto-Scaling Web Tier
 
+**Stack**:
+- Application Load Balancer - Internet facing Layer 7 Load Balancer 
+- Target Group - Collection of instances the ALB forwards traffic to
+- Amazon EC2
+- Security Groups - 
+- 
 
 ## Setup Instructions
 
@@ -53,37 +59,25 @@ Each instance uses a User Data script to automatically install the Apache web se
 
 ### Step 3 – Create a Target Group
 
-Create a target group named **`A2-TG`**.
+A target group named **`A2-TG`** with target type as instances so the ALB can route requests to the EC2 instances. Also, ensuring the health check protocol is HTTP and the health check path is `/`
 
-Configure the target group with the following settings:
-
-| Setting | Value |
-|---------|-------|
-| Target Type | Instances |
-| Protocol | HTTP |
-| Port | 80 |
-| VPC | Your project VPC |
-| Health Check Path | `/` |
-
-After creating the target group, register both EC2 instances:
-
-- `A2-EC2-1`
-- `A2-EC2-2`
+After creating the target group, register both EC2 instances: `A2-EC2-1` and `A2-EC2-2`
 
 The health check on the root path (`/`) verifies that the Apache web server is running and responding successfully on each instance.
 
 ![](screenshots/A2-TG.PNG)
 
+![](screenshots/HealthCheck.PNG)
+
+![](screenshots/HealthCheck2.PNG)
+
 > **📸 Screenshot:** Health Check configuration with the path set to `/`.
 
 ### Step 4 – Create the Application Load Balancer
 
-An internet-facing Application Load Balancer named **`A2-ALB`** across two public subnets in two different Availability Zones, ensuring a load balancer node is placed in each zone
+An internet-facing Application Load Balancer deployed across two public subnets in separate Availability Zones to provide high availability with a load balancer node in each zone.
 
 ![](screenshots/A2-ALB.PNG)
-
-Two public subnets in different Availability Zones are required for an ALB as this ensures high availability.
-
 
 ![](screenshots/A2-ALB-SG-Attached.PNG)
 
@@ -95,7 +89,7 @@ This configuration enables the Application Load Balancer to receive HTTP request
 
 Once the Application Load Balancer has finished provisioning, copy its **DNS name** and open the DNS name in your web browser.
 
-Make sure that the request is sent using HTTP if the browser defaults to HTTPS
+Ensure the request uses HTTP rather than HTTPS if the browser automatically redirects to HTTPS.
 
 Refresh the page several times and you should see the response alternate between:
 
