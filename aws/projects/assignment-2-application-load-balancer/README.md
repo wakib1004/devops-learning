@@ -3,9 +3,8 @@
 **Stack**:
 - Application Load Balancer - Internet facing Layer 7 Load Balancer 
 - Target Group - Collection of instances the ALB forwards traffic to
-- Amazon EC2
-- Security Groups - 
-- 
+- Amazon EC2 - `t3.micro` Amazon Linux web server 
+- Security Groups - ALB SG open to everyone on the internet on port 80 and EC2 SG open to only the ALB SG on port 80
 
 ## Setup Instructions
 
@@ -63,15 +62,11 @@ A target group named **`A2-TG`** with target type as instances so the ALB can ro
 
 After creating the target group, register both EC2 instances: `A2-EC2-1` and `A2-EC2-2`
 
-The health check on the root path (`/`) verifies that the Apache web server is running and responding successfully on each instance.
-
 ![](screenshots/A2-TG.PNG)
 
-![](screenshots/HealthCheck.PNG)
+![](screenshots/Health-Check-Settings.PNG)
 
-![](screenshots/HealthCheck2.PNG)
-
-> **📸 Screenshot:** Health Check configuration with the path set to `/`.
+The health check on the root path (`/`) verifies that the Apache web server is running and responding successfully on each instance.
 
 ### Step 4 – Create the Application Load Balancer
 
