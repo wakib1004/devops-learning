@@ -96,6 +96,20 @@ Two t3.micro EC2 instances using Amazon Linux AMI:
 
 ### Step 8 - SSH into the bastion 
 
+Connecting to the bastion server from my machine using SSH.
+
+![](screenshots/A1-SSH-Into-Bastion.PNG)
+
+---
+
+### Step 9 - SSH into private EC2 instance from the bastion
+
+Copy the private key into the bastion. From the bastion, SSH into to the private EC2 instance `A1-Private-EC2` using its private IP address.
+
+![](screenshots/A1-Bastion-to-Private-EC2.PNG)
+
+---
+
 
 
 
