@@ -85,17 +85,18 @@ The `A1-Public-EC2-SG` is the security group for the bastion host. The private s
 
 ### Step 7 - Launch the EC2 instances
 
-Two EC2 instances:
+Two t3.micro EC2 instances using Amazon Linux AMI:
 
-- `A1-Public-EC2` in the public subnet within the `eu-north-1a` AZ with a public IP address
-- `A1-Public-EC2` in the private subnet within the `eu-north-1b` AZ with no public IP address
-
+- `A1-Public-EC2` in the public subnet within the `eu-north-1a` AZ with an auto-assigned public IP address. Its security group is `A1-Public-EC2-SG`. This is the bastion host.
+- `A1-Private-EC2` in the private subnet within the `eu-north-1b` AZ with no public IP address. Its security group is `A1-Private-EC2-SG`.
 
 ![](screenshots/A1-EC2-Instances.PNG)
 
-
-
 ---
+
+### Step 8 - SSH into the bastion 
+
+
 
 
 
