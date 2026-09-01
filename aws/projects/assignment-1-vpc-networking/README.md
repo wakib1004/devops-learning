@@ -34,5 +34,40 @@ This is what allows the resources within the VPC to send and receive Internet tr
 
 ---
 
+### Step 4 - Create the NAT Gateway 
+
+Create the NAT Gateway named `A1-NGW` in the public subnet, with connectivity type being public and an assigned ELastic IP.
+
+![](screenshots/A1-NGW.PNG)
+
+The NAT Gateway allows resources within a private subnet to have outbound connections to the internet while not allowing the internet to initiate connections to the resources. It must reside in the public subnet so it can access the internet through the Internet Gateway. However, it also does not provide internet connectivity until the private subnet's route table directs traffic to it.
+
+---
+
+### Step 5 - Create the route tables
+
+Two route tables, each associated with their own subnet.
+
+- `A1-Public-RT` associated with the public subnet `A1-Public-Subnet`, with:
+ - A route with destination `0.0.0.0/0` targeting the Internet Gateway `A1-IGW`.
+ - A route with destination `10.0.0.0/16` targeting `local`.
+- `A1-Private-RT` associated with the private subnet `A1-Private-Subnet`, with:
+ - A route with destination `0.0.0.0/0` targeting the NAT Gateway `A1-NGW`.
+ - A route with destination `10.0.0.0/16` targeting `local`.
+
+![](screenshots/A1-Public-RT.PNG)
+
+![](screenshots/A1-Private-RT.PNG)
+
+These routes determine where traffic from resources should be sent based on its destination. The `local` target is always present and it is what lets resources within a VPC to communicate with each other.
+
+---
+
+### Step 6 - Create the Security Groups
+
+
+
+---
+
 
 
