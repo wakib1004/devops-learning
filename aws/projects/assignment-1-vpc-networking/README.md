@@ -15,8 +15,8 @@ The VPC is a private, isolated network within a cloud provider (such as AWS).
 
 ### Step 2 – Create the subnets
 
-- `A1-Public-Subnet` with the CIDR block `10.0.0.0/24` residing in `eu-north-1a` Availibility Zone.
-- `A1-Private-Subnet` with the CIDR block `10.0.1.0/24` residing in `eu-north-1b` Availibility Zone.
+- `A1-Public-Subnet` with the CIDR block `10.0.0.0/24` residing in `eu-north-1a` Availibility Zone (AZ).
+- `A1-Private-Subnet` with the CIDR block `10.0.1.0/24` residing in `eu-north-1b` Availibility Zone (AZ).
 
 ![](screenshots/A1-Subnets.PNG)
 
@@ -36,7 +36,7 @@ This is what allows the resources within the VPC to send and receive Internet tr
 
 ### Step 4 - Create the NAT Gateway 
 
-Create the NAT Gateway named `A1-NGW` in the public subnet, with connectivity type being public and an assigned ELastic IP.
+NAT Gateway `A1-NGW` residing in the public subnet, with connectivity type being public and an assigned ELastic IP.
 
 ![](screenshots/A1-NGW.PNG)
 
@@ -64,6 +64,34 @@ These routes determine where traffic from resources should be sent based on its 
 ---
 
 ### Step 6 - Create the Security Groups
+
+Two Security Groups, one for each EC2 instance:
+
+- `A1-Public-EC2-SG` with inbound rules allowing:
+ - HTTP (Port 80) traffic from my IP
+ - SSH (Port 22) traffic from my IP
+
+- `A1-Private-EC2-SG` with inbound rules allowing:
+ - HTTP (Port 80) traffic from the security group `A1-Public-EC2-SG`
+ - SSH (Port 22) traffic from the security group `A1-Public-EC2-SG`
+
+![](screenshots/A1-Public-EC2-SG.PNG)
+
+![](screenshots/A1-Private-EC2-SG.PNG)
+
+The `A1-Public-EC2-SG` is the security group for the bastion host. The private security group references the bastion's security group not it's IP address. This allows the private instance to be accessed through the bastion even if its IP address changes. This setup follows the principle of least privilege by minimising access to only what is necessary.
+
+---
+
+### Step 7 - Launch the EC2 instances
+
+Two EC2 instances:
+
+- `A1-Public-EC2` in the public subnet within the `eu-north-1a` AZ with a public IP address
+- `A1-Public-EC2` in the private subnet within the `eu-north-1b` AZ with no public IP address
+
+
+![](screenshots/A1-EC2-Instances.PNG)
 
 
 
