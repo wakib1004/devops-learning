@@ -112,28 +112,30 @@ Copy the private key into the bastion. From the bastion, SSH into to the private
 
 ### Bonus - Cloudwatch Monitoring on the EC2 instances
 
-Create an IAM role called `A1-CloudWatchAgentServerPolicy-Role` for EC2 instances with the CloudWatchAgentServerPolicy attached.
+Create an IAM role named `A1-CloudWatchAgentServerPolicy-Role` for EC2 instances and attach the AWS-managed `CloudWatchAgentServerPolicy` policy.
 
-Attach this to both of the EC2 instances.
+Attach the IAM role to both EC2 instances.
 
 ![](screenshots/A1-CloudWatchAgentServerPolicy-Role.PNG)
 
-
-This allows us to use amazon CloudWatch agent on the servers.
+This role allows the EC2 instances to publish monitoring metrics to Amazon CloudWatch using the CloudWatch agent.
 
 Then install and start the CloudWatch agent on both instances:
 
 ```bash
 
-sudo yum install amazon-cloudwatch-agent # Installs the CloudWatch agent
-
-sudo /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-config-wizard # Select Basic for the default metrics config which includes disk and memory metrics
-
-sudo /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a fetch-config -m ec2 -s -c file:/opt/aws/amazon-cloudwatch-agent/bin/config.json # Starts the CloudWatch agent 
+# Install the CloudWatch agent
+sudo yum install amazon-cloudwatch-agent
+# Run the CloudWatch agent configuration wizard
+sudo /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-config-wizard
+# Start the CloudWatch agent using the generated configuration
+sudo /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl \ -a fetch-config \ -m ec2 \ -s \ -c file:/opt/aws/amazon-cloudwatch-agent/bin/config.json
 
 ```
 
-The metrics of the instances are shown in CWAgent namespace
+During the configuration wizard, select Basic to use the default metrics configuration, which includes disk and memory metrics.
+
+The CloudWatch agent publishes instance metrics to the `CWAgent` namespace in Amazon CloudWatch.
 
 ![](screenshots/A1-CWAgent.PNG)
 
