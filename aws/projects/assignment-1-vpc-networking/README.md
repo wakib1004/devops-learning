@@ -114,9 +114,12 @@ Copy the private key into the bastion. From the bastion, SSH into to the private
 
 Create an IAM role called `A1-CloudWatchAgentServerPolicy-Role` for EC2 instances with the CloudWatchAgentServerPolicy attached.
 
+Attach this to both of the EC2 instances.
+
 ![](screenshots/A1-CloudWatchAgentServerPolicy-Role.PNG)
 
-Attach this to both of the EC2 instances.
+
+This allows us to use amazon CloudWatch agent on the servers.
 
 Then install and start the CloudWatch agent on both instances:
 
@@ -130,6 +133,10 @@ sudo /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a fetch-c
 
 ```
 
+The metrics of the instances are shown in CWAgent namespace
 
+![](screenshots/A1-CWAgent.PNG)
+
+---
 
 
