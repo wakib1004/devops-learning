@@ -110,6 +110,25 @@ Copy the private key into the bastion. From the bastion, SSH into to the private
 
 ---
 
+### Bonus - Cloudwatch Monitoring on the EC2 instances
+
+Create an IAM role called `A1-CloudWatchAgentServerPolicy-Role` for EC2 instances with the CloudWatchAgentServerPolicy attached.
+
+![](screenshots/A1-CloudWatchAgentServerPolicy-Role.PNG)
+
+Attach this to both of the EC2 instances.
+
+Then install and start the CloudWatch agent on both instances:
+
+```bash
+
+sudo yum install amazon-cloudwatch-agent # Installs the CloudWatch agent
+
+sudo /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-config-wizard # Select Basic for the default metrics config which includes disk and memory metrics
+
+sudo /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a fetch-config -m ec2 -s -c file:/opt/aws/amazon-cloudwatch-agent/bin/config.json # Starts the CloudWatch agent 
+
+```
 
 
 
