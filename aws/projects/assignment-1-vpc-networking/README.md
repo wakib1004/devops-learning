@@ -7,7 +7,7 @@
 ![Amazon CloudWatch](https://img.shields.io/badge/Amazon%20CloudWatch-FF4F8B?style=for-the-badge&logo=amazoncloudwatch&logoColor=white)
 ![Amazon Linux](https://img.shields.io/badge/Amazon%20Linux-232F3E?style=for-the-badge&logo=amazonlinux&logoColor=white)
 
-An AWS networking project: A custom VPC with public and private subnets, Internet and NAT Gateways, route tables, Bastion host and private EC2 instance both with security groups and Cloudwatch monitoring on both instances. 
+An AWS networking project: A custom VPC with public and private subnets, Internet and NAT Gateways, route tables, Bastion Host and private EC2 instance. Both EC2 instances are secured using Security Groups and their disc and memory metrics are monitored with Amazon CloudWatch.
 
 ## Setup Instructions
 
