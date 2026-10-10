@@ -18,7 +18,7 @@ and a private EC2 instance with CloudWatch monitoring enabled on both instances.
 - **Amazon EC2** – a public/bastion instance and a private instance (both `t3.micro`, Amazon Linux 2023)
 - **Security Groups** – least-privilege, instance-level firewalls (SSH/HTTP from my IP; private SSH from the bastion only)
 - **IAM role** – grants the instances permission to push metrics to CloudWatch
-- **Amazon CloudWatch + CloudWatch agent** – detailed monitoring plus custom memory/disk metrics
+- **Amazon CloudWatch + CloudWatch agent** – basic monitoring plus custom memory/disk metrics
 
 ## Setup Instructions
 
