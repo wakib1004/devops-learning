@@ -12,7 +12,7 @@ and a private EC2 instance with CloudWatch monitoring enabled on both instances.
 
 ## What I Built
 
-Created a custom VPC with a CIDR block `10.0.0.0/16` with a public and a private subnet, each with a `/24` CIDR block. Attached an Internet Gateway to the VPC to allow enable internet connectivity for resources in the public subnet. Created a NAT Gateway in the public subnet to allow a private EC2 instance 
+Created a custom VPC with a CIDR block `10.0.0.0/16` with a public and a private subnet, each with a `/24` CIDR block. Attached an Internet Gateway to the VPC to allow enable internet connectivity for resources in the public subnet. Created a NAT Gateway in the public subnet to allow the private EC2 instance in the private subnet internet access without allowing the internet to initiate connections to that resource. Created and configured the route tables to determine where traffic from resources should go based on its destination.
 
 **Stack:**
 - **Amazon VPC** – the isolated `10.0.0.0/16` network, carved into a public and a private `/24` subnet
