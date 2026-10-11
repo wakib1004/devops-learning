@@ -10,6 +10,10 @@
 An AWS networking project featuring a custom VPC with public and private subnets, an Internet Gateway, a NAT Gateway, route tables, security groups, a Bastion Host, 
 and a private EC2 instance with CloudWatch monitoring enabled on both instances.
 
+## What I Built
+
+Created a custom VPC with a CIDR block `10.0.0.0/16` with a public and a private subnet, each with a `/24` CIDR block. Attached an Internet Gateway to the VPC to allow enable internet connectivity for resources in the public subnet. Created a NAT Gateway in the public subnet to allow a private EC2 instance 
+
 **Stack:**
 - **Amazon VPC** – the isolated `10.0.0.0/16` network, carved into a public and a private `/24` subnet
 - **Internet Gateway** – bidirectional internet access for the public subnet
@@ -49,7 +53,7 @@ Internet Gateway `A1-IGW` attached to `A1-VPC`.
 
 ![](screenshots/A1-IGW.PNG)
 
-This is what allows the resources within the VPC to send and receive Internet traffic. However, attaching an Internet Gateway alone does not provide internet connectivity until a route table directs traffic to it.
+This is what allows the resources within the VPC to communicate with the internet. However, attaching an Internet Gateway alone does not provide internet connectivity until a route table directs traffic to it.
 
 ---
 
