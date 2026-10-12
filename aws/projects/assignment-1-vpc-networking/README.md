@@ -27,6 +27,7 @@ A custom VPC with a CIDR block `10.0.0.0/16` that contains one public subnet and
 
 ## Architecture Diagram 
 
+![](screenshots/A1-Architecture-Diagram.PNG)
 
 
 ## Setup Instructions
