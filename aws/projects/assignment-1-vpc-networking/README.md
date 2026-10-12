@@ -185,7 +185,7 @@ The CloudWatch agent publishes instance metrics to the `CWAgent` namespace in Am
 
 ### IGW and NGW
 
-- Internet Gateway allows the resources within the VPC that have a public IP address to communicate with the internet and supports bi-directional communication
+- Internet Gateway allows the resources within the VPC that have a public IP address to communicate with the internet and supports bi-directional communication.
 - NAT Gateway resides in the public subnet and enables internet access for resources within the private subnet without allowing unsollicted inbound connections to it.
 
 ### Route tables
@@ -209,4 +209,33 @@ The CloudWatch agent publishes instance metrics to the `CWAgent` namespace in Am
 - The default metrics do not include the disk usage and memory usage. Cloudwatch Agent is required to collect those metrics
 - The CloudWatch Agent requires an IAM role to be attached to the EC2 instance. This role must have the AWS-managed CloudWatchAgentServerPolicy policy attached to grant the agent the necessary permissions to publish metrics and logs to Amazon CloudWatch.
 - The CloudWatch agent publishes instance metrics to the `CWAgent` namespace in Amazon CloudWatch.
+
+## Challenges and How I Solved Them 
+
+### 1. Could not connect to the public EC2 instance
+
+I tried connecting and it failed despite me not changing any of the security group rules. Then I found out my IP address was different from what was in the security group rules because my IP address chnaged from what it was before.
+
+Solution: I changed the IP address in the security group rules.
+
+### 2. Unable to SSH into the Private EC2 Instance from the Bastion Host
+
+Initially, the private key (A1-Key.pem) was stored on my local machine at ~/AWS-Assignments/A1-Key.pem.
+
+After connecting to the Bastion Host, I tried to SSH into the private EC2 instance using the following command:
+
+ssh -i ~/AWS-Assignments/A1-Key.pem ec2-user@10.0.1.191
+
+However, the connection failed because the private key was stored on my local machine and was not available on the Bastion Host.
+
+The following warning appeared:
+
+Warning: Identity file /home/ec2-user/AWS-Assignments/A1-Key.pem not accessible: No such file or directory.
+
+Solution: I copied the private key to the Bastion Host and used it to authenticate my SSH connection to the private EC2 instance and was able to connect.
+
+
+
+
+
 
