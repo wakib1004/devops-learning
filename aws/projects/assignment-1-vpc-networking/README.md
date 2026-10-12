@@ -49,12 +49,12 @@ The VPC is a private, isolated network within a cloud provider (such as AWS).
 
 ### Step 2 – Create the subnets
 
-- `A1-Public-Subnet` with the CIDR block `10.0.0.0/24` residing in `eu-north-1a` Availibility Zone (AZ).
-- `A1-Private-Subnet` with the CIDR block `10.0.1.0/24` residing in `eu-north-1b` Availibility Zone (AZ).
+- `A1-Public-Subnet` with the CIDR block `10.0.0.0/24` residing in `eu-north-1a` Availability Zone (AZ).
+- `A1-Private-Subnet` with the CIDR block `10.0.1.0/24` residing in `eu-north-1b` Availability Zone (AZ).
 
 ![](screenshots/A1-Subnets.PNG)
 
-These are smaller networks within the VPC. However, they are not yet truly public or private. Each of them have 256 IP addresses but AWS reserves 5 IPs (for network address, VPC router, DNS, future use a nd broadcast address), so only 251 are usable.
+These are smaller networks within the VPC. However, they are not yet truly public or private. Each of them have 256 IP addresses but AWS reserves 5 IPs (for network address, VPC router, DNS, future use and broadcast address), so only 251 are usable.
 
 ---
 
@@ -70,7 +70,7 @@ This is what allows the resources within the VPC to communicate with the interne
 
 ### Step 4 - Create the NAT Gateway 
 
-NAT Gateway `A1-NGW` residing in the public subnet, with connectivity type being public and an assigned ELastic IP.
+NAT Gateway `A1-NGW` residing in the public subnet, with connectivity type being public and an assigned Elastic IP.
 
 ![](screenshots/A1-NGW.PNG)
 
@@ -93,7 +93,7 @@ Two route tables, each associated with their own subnet.
 
 ![](screenshots/A1-Private-RT.PNG)
 
-These routes determine where traffic from resources should be sent based on its destination. The `local` target is always present and it is what lets resources within a VPC to communicate with each other.
+These routes determine where traffic from resources should be sent based on its destination. The `local` target is always present, and it allows resources within a VPC to communicate with each other.
 
 ---
 
@@ -113,7 +113,7 @@ Two Security Groups, one for each EC2 instance:
 
 ![](screenshots/A1-Private-EC2-SG.PNG)
 
-The `A1-Public-EC2-SG` is the security group for the bastion host. The private security group references the bastion's security group not it's IP address. This allows the private instance to be accessed through the bastion even if its IP address changes. This setup follows the principle of least privilege by minimising access to only what is necessary.
+The `A1-Public-EC2-SG` is the security group for the bastion host. The private security group references the bastion's security group, not its IP address. This allows the private instance to be accessed through the bastion even if its IP address changes. This setup follows the principle of least privilege by minimising access to only what is necessary.
 
 ---
 
@@ -138,13 +138,13 @@ Connecting to the bastion server from my machine using SSH.
 
 ### Step 9 - SSH into private EC2 instance from the bastion
 
-Copy the private key into the bastion. From the bastion, SSH into to the private EC2 instance `A1-Private-EC2` using its private IP address.
+Copy the private key to the bastion. From the bastion, SSH into to the private EC2 instance `A1-Private-EC2` using its private IP address.
 
 ![](screenshots/A1-Bastion-to-Private-EC2.PNG)
 
 ---
 
-### Bonus - Cloudwatch Monitoring on the EC2 instances
+### Bonus - CloudWatch Monitoring on the EC2 instances
 
 Create an IAM role named `A1-CloudWatchAgentServerPolicy-Role` for EC2 instances and attach the AWS-managed `CloudWatchAgentServerPolicy` policy.
 
@@ -180,8 +180,8 @@ The CloudWatch agent publishes instance metrics to the `CWAgent` namespace in Am
 ### VPC and subnets
 
 - VPC is an isolated private network within a cloud provider.
-- AWS reserves 5 IPs (for network address, VPC router, DNS, future use and broadcast address), so only 251 IPs are usable in a /24 subnet
-- No subnet is inherently private or public but only becomes so after creating and configruing the route tables.
+- AWS reserves 5 IPs (for the network address, VPC router, DNS, future use and broadcast address), so only 251 IPs are usable in a /24 subnet.
+- No subnet is inherently private or public; it only becomes so after the route tables have been created and configured.
 
 ### IGW and NGW
 
