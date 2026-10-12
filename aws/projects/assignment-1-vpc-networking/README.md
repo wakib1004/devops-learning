@@ -12,17 +12,22 @@ and a private EC2 instance with CloudWatch monitoring enabled on both instances.
 
 ## What I Built
 
-Created a custom VPC with a CIDR block `10.0.0.0/16` with a public and a private subnet, each with a `/24` CIDR block. Attached an Internet Gateway to the VPC to allow enable internet connectivity for resources in the public subnet. Created a NAT Gateway in the public subnet to allow the private EC2 instance in the private subnet internet access without allowing the internet to initiate connections to that resource. Created and configured the route tables to determine where traffic from resources should go based on its destination.
+A custom VPC with a CIDR block `10.0.0.0/16` that contains one public subnet and one private subnet, each with a `/24` CIDR block. The public subnet can access the internet through an Internet Gateway while the private subnet can access the internet through a NAT Gateway without allowing unsolicited inbound connections to it. A public EC2 instance acts as a bastion host, serving as the sole SSH entry point into the private EC2 instance. Disk and memory metrics from both instances are published to Amazon CloudWatch using the CloudWatch Agent.
 
 **Stack:**
-- **Amazon VPC** – the isolated `10.0.0.0/16` network, carved into a public and a private `/24` subnet
-- **Internet Gateway** – bidirectional internet access for the public subnet
-- **NAT Gateway + Elastic IP** – outbound-only internet for the private subnet
-- **Route Tables** – the routing that actually *makes* a subnet public or private
-- **Amazon EC2** – a public/bastion instance and a private instance (both `t3.micro`, Amazon Linux 2023)
-- **Security Groups** – least-privilege, instance-level firewalls (SSH/HTTP from my IP; private SSH from the bastion only)
-- **IAM role** – grants the instances permission to push metrics to CloudWatch
-- **Amazon CloudWatch + CloudWatch agent** – basic monitoring plus custom memory/disk metrics
+- **Amazon VPC**
+- **Subnet**
+- **Internet Gateway** 
+- **NAT Gateway + Elastic IP** 
+- **Route Tables**
+- **Security Groups** 
+- **Amazon EC2** 
+- **IAM role** 
+- **Amazon CloudWatch + CloudWatch agent**
+
+## Architecture Diagram 
+
+
 
 ## Setup Instructions
 
