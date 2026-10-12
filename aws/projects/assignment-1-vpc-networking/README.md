@@ -189,13 +189,19 @@ The CloudWatch agent publishes instance metrics to the `CWAgent` namespace in Am
 - NAT Gateway resides in the public subnet and enables internet access for resources within the private subnet without allowing unsollicted inbound connections to it.
 
 ### Route tables
-- Route tables must be explicitly associated with the correct subnet as 
+
+- Route tables must be explicitly associated with the correct subnet because the route table determines where network traffic from that subnet should go.
 - Route tables determine where traffic from resources should be sent based on its destination.
 - The `local` target in route tables is what enables resources within a VPC to communicate with each other.
 
 ### Security Groups
+
 - Security groups are stateful. This means if traffic is allowed in one direction the return traffic is automatically allowed.
 - A security group can be referenced in the rules of another security group instead of specifying individual IP addresses. This avoids depending on fixed IP addresses, as IPs of resources may change.
+
+### Bastion Host
+
+- Bastion Host is a server that acts as a secure entry point for accessing instances within a private subnet, allowing us to connect to the instances without exposing them directly to the internet.
 
  ### Cloudwatch monitoring
 
