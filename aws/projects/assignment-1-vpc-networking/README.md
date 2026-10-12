@@ -31,7 +31,7 @@ A custom VPC with a CIDR block `10.0.0.0/16` that contains one public subnet and
 
 How traffic flows: 
 - **Me → IGW → bastion host:** SSH and HTTP access to the bastion host from my IP only.
-- **Bastion host → private EC2.** SSH access to private EC2 instance from the bastion host's security group.
+- **Bastion host → private EC2:** SSH access to private EC2 instance from the bastion host's security group.
 - **Private EC2 → NGW → IGW → internet:** Only outbound internet access but nothing on the internet can initiate connection to the instance.
 - **Both instances → Cloudwatch:** Memory and disk metrics are reported to Cloudwatch.
 
@@ -175,4 +175,17 @@ The CloudWatch agent publishes instance metrics to the `CWAgent` namespace in Am
 
 ---
 
+## What I Learnt
+
+- VPC is an isolated private network within a cloud provider.
+- AWS reserves 5 IPs (for network address, VPC router, DNS, future use and broadcast address), so only 251 IPs are usable in a /24 subnet
+- No subnet is inherently private or public but only becomes so after creating and configruing the route tables.
+
+- Internet Gateway allows the resources within the VPC that have a public IP address to communicate with the internet and supports bi-directional communication
+- NAT Gateway resides in the public subnet and enables internet access for resources within the private subnet without allowing unsollicted inbound connections to it.
+
+- Route tables determine where traffic from resources should be sent based on its destination.
+- The `local` target in route tables is what enables resources within a VPC to communicate with each other.
+
+- A security group can allow access from another resource by referncing its security group and this allows it to be accessed even if the IP of the other resource changes
 
