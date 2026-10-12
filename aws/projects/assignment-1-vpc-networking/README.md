@@ -245,7 +245,24 @@ The NAT Gateway and Elastic IP is charged per hour and instances and monitoring 
 
 The EC2 instances must be first terminated before VPC can be deleted. 
 
+## Project Structure
 
+```
+assignment-1-vpc-networking/  
+│  
+├── screenshots  
+└── README.md  
+```
+## Project Structure
+
+```
+flask+redis-app/  
+│  
+├── app.py – Flask application  
+├── Dockerfile – Build instructions for Flask container  
+├── docker-compose.yml – Multi-container setup with Redis volume  
+└── README.md  
+```
 
 
 
