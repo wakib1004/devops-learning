@@ -234,6 +234,17 @@ Warning: Identity file /home/ec2-user/AWS-Assignments/A1-Key.pem not accessible:
 
 Solution: I copied the private key to the Bastion Host and used it to authenticate my SSH connection to the private EC2 instance and was able to connect.
 
+## Cleanup 
+
+The NAT Gateway and Elastic IP is charged per hour and instances and monitoring disk and memory metrics can incur charges so they should be cleaned up. 
+ 
+- Delete the NAT Gateway
+- Release the Elastic IP since unattached EIP is chargable.
+- Terminate both EC2 instances and this also stops the monitoring through Cloudwatch Agent.
+- Delete the VPC (This also gets rid of route tables, subnets and the Internet Gateway).
+
+The EC2 instances must be first terminated before VPC can be deleted. 
+
 
 
 
