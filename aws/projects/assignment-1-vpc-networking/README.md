@@ -29,6 +29,11 @@ A custom VPC with a CIDR block `10.0.0.0/16` that contains one public subnet and
 
 ![](screenshots/A1-Architecture-Diagram.PNG)
 
+How traffic flows: 
+- **Me → IGW → bastion host:** SSH and HTTP access to the bastion host is restricted to my IP only.
+- **Bastion host → private EC2.** SSH access to private EC2 instance is only allowed from  bastion host's security group
+- **Private EC2 → NGW → IGW → internet.**.
+- **Both instances → Cloudwatch.**
 
 ## Setup Instructions
 
