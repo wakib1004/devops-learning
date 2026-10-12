@@ -253,16 +253,7 @@ assignment-1-vpc-networking/
 ├── screenshots  
 └── README.md  
 ```
-## Project Structure
 
-```
-flask+redis-app/  
-│  
-├── app.py – Flask application  
-├── Dockerfile – Build instructions for Flask container  
-├── docker-compose.yml – Multi-container setup with Redis volume  
-└── README.md  
-```
 
 
 
