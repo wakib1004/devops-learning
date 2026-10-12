@@ -177,15 +177,30 @@ The CloudWatch agent publishes instance metrics to the `CWAgent` namespace in Am
 
 ## What I Learnt
 
+### VPC and subnets
+
 - VPC is an isolated private network within a cloud provider.
 - AWS reserves 5 IPs (for network address, VPC router, DNS, future use and broadcast address), so only 251 IPs are usable in a /24 subnet
 - No subnet is inherently private or public but only becomes so after creating and configruing the route tables.
 
+### IGW and NGW
+
 - Internet Gateway allows the resources within the VPC that have a public IP address to communicate with the internet and supports bi-directional communication
 - NAT Gateway resides in the public subnet and enables internet access for resources within the private subnet without allowing unsollicted inbound connections to it.
 
+### Route tables
+- Route tables must be explicitly associated with the correct subnet as 
 - Route tables determine where traffic from resources should be sent based on its destination.
 - The `local` target in route tables is what enables resources within a VPC to communicate with each other.
 
-- A security group can allow access from another resource by referncing its security group and this allows it to be accessed even if the IP of the other resource changes
+### Security Groups
+- Security groups are stateful. This means if traffic is allowed in one direction the return traffic is automatically allowed.
+- A security group can be referenced in the rules of another security group instead of specifying individual IP addresses. This avoids depending on fixed IP addresses, as IPs of resources may change.
+
+ ### Cloudwatch monitoring
+
+- By default, Amazon EC2 sends metric data to CloudWatch in 5-minute periods.
+- The default metrics do not include the disk usage and memory usage. Cloudwatch Agent is required to collect those metrics
+- The CloudWatch Agent requires an IAM role to be attached to the EC2 instance. This role must have the AWS-managed CloudWatchAgentServerPolicy policy attached to grant the agent the necessary permissions to publish metrics and logs to Amazon CloudWatch.
+- The CloudWatch agent publishes instance metrics to the `CWAgent` namespace in Amazon CloudWatch.
 
