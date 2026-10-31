@@ -81,6 +81,7 @@ provider "aws" {
   region = "eu-north-1"
 }
 ```
+Configured the Terraform AWS provider (which is a plugin) to allow Terraform to communicate with AWS. Specified the AWS region (eu-north-1). This enables Terraform to provision and manage AWS resources within that specified region.
 
 2. Variables
 ```hcl
