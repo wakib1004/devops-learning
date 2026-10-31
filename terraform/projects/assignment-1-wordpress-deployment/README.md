@@ -47,6 +47,21 @@ The deployment process follows these steps:
 
 ---
 
+## Terraform Code Structure
+
+The Terraform code is organised into separate files to keep the infrastructure configuration simple and maintainable.
+
+- **main.tf:** Defines the infrastructure resources and their configurations.
+- **variables.tf:** Declares input variables used in the Terraform configuration.
+- **outputs.tf:** Defines output values that are displayed after the `terraform apply` command completes, such as the instance ID, public IP address public DNS.
+- **terraform.tfvars:** Provides environment-specific values for the declared variables.
+- **.terraform.lock.hcl:** Maintains consistent provider versions across Terraform executions.
+- **.terraform directory.:** Contains downloaded Terraform provider plugins and any other files if they are required to initialise and manage the Terraform working directory.
+- **terraform.tfstate:** Terraform uses the state file to track the infrastructure resources it manages.
+- **terraform.tfstate.backup:** Contains a backup of the Terraform state file.
+
+---
+
 ## What I built
 
 1. Terraform Provider Configuration
@@ -325,8 +340,8 @@ After making these changes, the database connection error was resolved.
 ## Files
 
 - [`README.md`](README.md) - this file
-- [`provider.tf`](provider.tf) - AWS provider and S3 remote-state backend
 - [`variables.tf`](variables.tf) - input variables (instance type, AMI, region)
-- [`main.tf`](main.tf) - EC2 instance, security group, and Route 53 record
-- [`outputs.tf`](outputs.tf) - the IP and domain URLs printed after `apply`
-- [`.gitignore`](.gitignore) - excludes state, `.tfvars`, and the `.terraform` directory
+- [`main.tf`](main.tf) - EC2 instance, security group, and AWS provider
+- [`outputs.tf`](outputs.tf) - the IP and domain URLs printed after `terraform apply` command
+- [`terraform.tfvars`](terraform.tfvars) - Defines the actual values assigned to the input variables declared in variables.tf
+- [`.gitignore`](.gitignore) - used to exclude the state file, `terraform.tfstate.backup` and the `.terraform` directory
