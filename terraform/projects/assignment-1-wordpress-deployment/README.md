@@ -1,6 +1,49 @@
 # Deploying a Full Wordpress Stack on AWS using Terraform 
+![Terraform](https://img.shields.io/badge/Terraform-7B42BC?style=for-the-badge&logo=terraform&logoColor=white)
+![AWS](https://img.shields.io/badge/AWS-232F3E?style=for-the-badge&logo=amazonwebservices&logoColor=white)
+![Amazon EC2](https://img.shields.io/badge/Amazon%20EC2-FF9900?style=for-the-badge&logo=amazonec2&logoColor=white)
+![Ubuntu](https://img.shields.io/badge/Ubuntu-E95420?style=for-the-badge&logo=ubuntu&logoColor=white)
+![MariaDB](https://img.shields.io/badge/MariaDB-003545?style=for-the-badge&logo=mariadb&logoColor=white)
+![WordPress](https://img.shields.io/badge/WordPress-21759B?style=for-the-badge&logo=wordpress&logoColor=white)
+![GNU Bash](https://img.shields.io/badge/GNU%20Bash-4EAA25?style=for-the-badge&logo=gnubash&logoColor=white)
 
 Deployed a WordPress application on AWS using Terraform by provisioning an EC2 instance and a MariaDB database, automating the installation of WordPress and its required dependencies, configuring WordPress to connect to the database, and setting up security groups to enable public web access and secure database connectivity.
+
+---
+
+## Technology Stack
+
+| Technology | Purpose |
+|---|---|
+| **Terraform** | Infrastructure as Code tool used to provision and manage AWS resources. |
+| **Amazon EC2** | Hosts the WordPress application and its required dependencies. |
+| **AWS Security Groups** | Controls inbound and outbound network traffic to the EC2 instance. |
+| **Ubuntu Server 26.04 LTS** | Operating system running on the EC2 instance. |
+| **Apache** | Web server responsible for serving the WordPress application. |
+| **MariaDB** | Database used to store WordPress data. |
+| **PHP** | Scripting language required to run WordPress. |
+| **WordPress** | Content management system used to build and manage the website. |
+| **Bash** | Used to automate the installation and configuration of the application through EC2 user data. |
+
+---
+
+## How It Works
+
+The deployment process follows these steps:
+
+1. **Terraform provisions the infrastructure.** Terraform uses the AWS provider to communicate with AWS and provision an EC2 instance and its associated security group.
+
+2. **The EC2 instance launches.** An Ubuntu Server 26.04 LTS instance is created with a public IPv4 address, providing a publicly accessible endpoint.
+
+3. **User data executes automatically.** During the initial boot process, the Bash user data script executes to install and configure the required software.
+
+4. **The LAMP stack is installed.** Apache, MariaDB and PHP are installed to provide the environment required to run WordPress.
+
+5. **The database is configured.** A MariaDB database and dedicated database user are created, with the necessary privileges granted.
+
+6. **WordPress is installed and configured.** The WordPress package is downloaded, extracted and copied into the Apache web directory. Its configuration file is updated with the database connection details.
+
+7. **The application becomes accessible.** Once the installation and configuration process completes, users can access the WordPress application through the EC2 instance's public IPv4 address and custom domain.
 
 ---
 
@@ -229,6 +272,11 @@ state specified in configuration files.
 terraform apply #Applies the changes defined in the Terraform configuration files to create, update, or destroy infrastructure as required.
 
 ```
+Then the site was live on both 51.21.171.237/wordpress and <custom domain>/wordpress: 
+
+<img width="995" height="686" alt="wordpress_screenshot" src="https://github.com/user-attachments/assets/c9be125b-7153-4ea3-b731-6850d552786d" />
+
+
 ---
 
 ### What I learnt
@@ -272,4 +320,13 @@ Solution:
 
 After making these changes, the database connection error was resolved.
 
+----
 
+## Files
+
+- [`README.md`](README.md) - this file
+- [`provider.tf`](provider.tf) - AWS provider and S3 remote-state backend
+- [`variables.tf`](variables.tf) - input variables (instance type, AMI, region)
+- [`main.tf`](main.tf) - EC2 instance, security group, and Route 53 record
+- [`outputs.tf`](outputs.tf) - the IP and domain URLs printed after `apply`
+- [`.gitignore`](.gitignore) - excludes state, `.tfvars`, and the `.terraform` directory
