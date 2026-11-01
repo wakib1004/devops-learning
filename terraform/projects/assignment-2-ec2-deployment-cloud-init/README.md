@@ -243,18 +243,19 @@ Provided the required input variable values to configure the security group, all
 
 The security group ID is exposed through the module's output block and referenced by the ec2 module, allowing both modules to work together.
 
-#### 7. 
+#### 7. Deploying the resources to the AWS cloud
+
+Ran the following to deploy the resources to the cloud:
+
 ```bash
-terraform init #
+terraform init # Initialized the working directory, downloading the provider, modules and configuring the backend for the Terraform state file.
 
-terraform validate
+terraform validate # Validated the terraform configuration files to ensure they are syntactically valid and internally consistent.
 
-terraform plan
+terraform plan # Created an execution plan and determined the actions required to achieve the desired state specified in configuration files.
 
-terraform apply
+terraform apply # Applied the changes defined in the Terraform configuration files to create the infrastructure.
 ```
-
-
 
 ---
  
@@ -281,10 +282,19 @@ From doing this, I learnt:
 to use those outputs for other parts of our configuration.
 
 6. I don't fully understand 
+╷
+│ Error: Invalid function argument
+│ 
 │   on modules\ec2\ec2.tf line 5, in resource "aws_instance" "a2_ec2_instance":
 │    5:     user_data = file("cloud-init.yaml")
 │     ├────────────────
 │     │ while calling file(path)
+│ 
+│ Invalid value for "path" parameter: no file exists at "cloud-init.yaml"; this function works
+│ only with files that are distributed as part of the configuration source code, so if this file
+│ will be created by a resource in this configuration you must instead obtain this result from
+│ an attribute of that resource.
+
 
 ---
 
@@ -340,8 +350,7 @@ I created a secuirty group with inbound rule allowing HTTP traffic from anywhere
 Same error was there for the `security_group` module.
 
 **Solution:** 
-I ran the command `terraform init` and the error was resolved.
-
+I ran the command `terraform init` to download the modules and the error was resolved.
 
 ### 4. Failed to access the ID of the Security group from a child module
 
@@ -361,12 +370,13 @@ The security group was configured in the security group module but the ec2 modul
 
 **Solution:**
 
-To resolve this issue, I needed to pass the security group's ID from the security group child module to the EC2 child module through the root module.
+To resolve this issue, I needed to pass the security group's ID from the security group child module to the EC2 child module through the root module. So I
 
-- I configured an output block in the security group module to expose the security group's ID to the root module
-- I configure an input variable in the EC2 module to accept the security group ID, and referenced that variable in ec2.tf in the resource block:
+- configured an output block in the security group module to expose the security group's ID to the root module
+- configure an input variable in the EC2 module to accept the security group ID, and referenced that variable in ec2.tf in the resource block:
 `vpc_security_group_ids = var.vpc_security_group_ids`
-- I passed the output from the security_group module into the ec2module through the root module's configuration:
+- passed the output from the security_group module into the ec2module through the root module's configuration:
+
 ```hcl module "ec2" {
   source = "./modules/ec2"
 
