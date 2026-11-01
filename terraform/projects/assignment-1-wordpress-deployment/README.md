@@ -276,14 +276,11 @@ has been completed.
 export AWS_ACCESS_KEY_ID="<AWS_ACCESS_KEY_ID>"
 export AWS_SECRET_ACCESS_KEY="<AWS_SECRET_ACCESS_KEY>"
 
-terraform init #Initializes the working directory. Downloads the provider and configures the 
-backend for the Terraform State file 
+terraform init #Initializes the working directory. Downloads the provider and configures the backend for the Terraform State file 
 
-terraform validate #Validates the terraform configuration files within that working directory to ensure they are syntactically valid 
-and internally consistent
+terraform validate #Validates the terraform configuration files to ensure they are syntactically valid and internally consistent
 
-terraform plan #Creates an execution plan and determines the nessecary actions required to achieve the desired
-state specified in configuration files.
+terraform plan #Creates an execution plan and determines the actions required to achieve the desired state specified in configuration files.
 
 terraform apply #Applies the changes defined in the Terraform configuration files to create, update, or destroy infrastructure as required.
 
