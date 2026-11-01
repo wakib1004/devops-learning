@@ -243,6 +243,18 @@ Provided the required input variable values to configure the security group, all
 
 The security group ID is exposed through the module's output block and referenced by the ec2 module, allowing both modules to work together.
 
+#### 7. 
+```bash
+terraform init #
+
+terraform validate
+
+terraform plan
+
+terraform apply
+```
+
+
 
 ---
  
