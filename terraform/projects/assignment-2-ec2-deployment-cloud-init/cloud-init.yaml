@@ -1,0 +1,9 @@
+#cloud-config
+
+# Update and upgrade packages on the system
+package_update: true
+package_upgrade: true
+
+# Install apache2
+packages: 
+- apache2
