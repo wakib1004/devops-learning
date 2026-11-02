@@ -461,8 +461,6 @@ assignment-2-ec2-deployment-cloud-init/
 
 ```
 
-The `.gitignore` file specifies which files and directories Git should ignore when tracking changes in the project.
-
 The .terraform/ directory and the two state files, terraform.tfstate and terraform.tfstate.backup, are also present in the project root directory. However, they have not been uploaded to GitHub because they are files that should be excluded from version control.
 
 - `.terraform/`                  Contains the downloaded Terraform providers and modules.
