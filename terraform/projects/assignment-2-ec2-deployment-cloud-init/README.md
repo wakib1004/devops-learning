@@ -7,8 +7,7 @@
 ![Apache](https://img.shields.io/badge/Apache-D22128?style=for-the-badge&logo=apache&logoColor=white)
 ![cloud-init](https://img.shields.io/badge/cloud--init-F5C211?style=for-the-badge&logo=cloudinit&logoColor=black)
 
-Used Terraform to provision and configure an EC2 instance, use a cloud-init YAML file as the user data to install Apache HTTP server and to provision and 
-configure the security group for the EC2 instance to allow inbound HTTP access and all outbound traffic. Structured the Terraform code for clarity using variables and modules to make the code dynamic and reusable.
+Used Terraform to provision and configure an EC2 instance, passing a cloud-init YAML file as the user data to install Apache HTTP server, along with a security group for the EC2 instance allowing inbound HTTP and all outbound traffic. Structured the Terraform code for clarity using variables and modules to make the code dynamic and reusable.
 
 ---
 ## Stack
