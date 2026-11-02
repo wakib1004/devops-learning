@@ -1,7 +1,36 @@
 # Deployed an EC2 instance and configured it using Terraform and a cloud-init file
 
+![Terraform](https://img.shields.io/badge/Terraform-7B42BC?style=for-the-badge&logo=terraform&logoColor=white)
+![AWS](https://img.shields.io/badge/AWS-232F3E?style=for-the-badge&logo=amazonwebservices&logoColor=white)
+![Amazon EC2](https://img.shields.io/badge/Amazon%20EC2-FF9900?style=for-the-badge&logo=amazonec2&logoColor=white)
+![Ubuntu](https://img.shields.io/badge/Ubuntu-E95420?style=for-the-badge&logo=ubuntu&logoColor=white)
+![Apache](https://img.shields.io/badge/Apache-D22128?style=for-the-badge&logo=apache&logoColor=white)
+![cloud-init](https://img.shields.io/badge/cloud--init-F5C211?style=for-the-badge&logo=cloudinit&logoColor=black)
+
 Used Terraform to provision and configure an EC2 instance, use a cloud-init YAML file as the user data to install Apache HTTP server and to provision and 
 configure the security group for the EC2 instance to allow inbound HTTP access and all outbound traffic. Structured the Terraform code for clarity using variables and modules to make the code dynamic and reusable.
+
+---
+## Stack
+
+- **Terraform** – Infrastructure as Code (IaC) tool used to provision and manage AWS resources.
+- **Amazon EC2** – A virtual machine provisioned in AWS to host the Apache web server.
+- **cloud-init** – A YAML configuration file used to automate the initial setup of the EC2 instance when it first boots.
+- **Ubuntu** – The Linux operating system running on the EC2 instance, on which Apache HTTP Server is installed and configured using cloud-init.
+- **Apache HTTP Server** – The web server automatically installed on the EC2 instance using cloud-init.
+- **Security Group** – Acts as a virtual firewall, allowing inbound HTTP traffic on port 80 and all outbound traffic.
+- **Terraform Modules** – Separate reusable modules used to organise the EC2 instance and security group configurations.
+
+---
+
+## How it works
+
+- **Terraform provisions the infrastructure.** The root module calls the EC2 and security group modules, passing the required input variables to configure each resource. Terraform uses the AWS provider to communicate with AWS and creates the security group and EC2 instance.
+- **The modules working together:** The security group module creates the security group and exposes its ID through an output. The root module passes this ID into the EC2 module so that the security group can be attached to the instance.
+- **Terraform passes the cloud-init configuration to EC2.** The `file()` function reads the contents of `cloud-init.yaml` and passes them to the EC2 instance through the `user_data` argument.
+- **The instance boots and configures itself.** On first boot, cloud-init reads the YAML configuration, updates and upgrades the packages, and installs Apache HTTP Server.
+- **The security group allows HTTP traffic.** Inbound traffic on port 80 is permitted so that users can access the Apache web server through a browser. All outbound traffic is also permitted.
+- **Apache serves the web page.** Once Apache has been installed and started, the web server can be accessed using the EC2 instance's public IPv4 address or public DNS.
 
 ---
 
@@ -400,3 +429,36 @@ After this, the error was resolved.
 ╵
 
 ---
+
+## Project Structure
+
+```text
+assignment-2-ec2-deployment-cloud-init/
+│
+├── modules/
+│   ├── ec2/
+│   │   ├── ec2.tf               # Defines and configures the EC2 instance.
+│   │   ├── outputs.tf           # Exposes the EC2 instance ID, public IPv4 address and public DNS.
+│   │   └── variables.tf         # Defines the input variables required by the EC2 module.
+│   │
+│   └── security_group/
+│       ├── outputs.tf           # Exposes the security group ID.
+│       ├── security_group.tf    # Defines the security group and its inbound and outbound rules.
+│       └── variables.tf         # Defines the input variables required by the security group module.
+│
+├── .terraform.lock.hcl          # Records the selected provider versions and their checksums.
+├── .gitignore                   # Specifies files and directories that Git should ignore.
+├── README.md                    # This file
+├── cloud-init.yaml              # Contains the cloud-init configuration used to update the system and install Apache.
+├── main.tf                      # Calls the EC2 and security group modules and passes the required input variables.
+├── provider.tf                  # Configures the AWS provider and specifies the AWS region.
+
+```
+
+The `.gitignore` file specifies which files and directories Git should ignore when tracking changes in the project.
+
+The .terraform/ directory and the two state files, terraform.tfstate and terraform.tfstate.backup, are also present in the project root directory. However, they have not been uploaded to GitHub because they are files that should be excluded from version control.
+
+- `.terraform/`                 # Contains the downloaded Terraform providers and modules.
+- `terraform.tfstate`            # Stores Terraform's current record of the managed infrastructure.
+- `terraform.tfstate.backup `    # Contains a previous backup of the Terraform state file.
