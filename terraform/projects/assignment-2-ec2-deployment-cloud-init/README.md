@@ -465,6 +465,6 @@ The `.gitignore` file specifies which files and directories Git should ignore wh
 
 The .terraform/ directory and the two state files, terraform.tfstate and terraform.tfstate.backup, are also present in the project root directory. However, they have not been uploaded to GitHub because they are files that should be excluded from version control.
 
-- `.terraform/`                 # Contains the downloaded Terraform providers and modules.
-- `terraform.tfstate`            # Stores Terraform's current record of the managed infrastructure.
-- `terraform.tfstate.backup `    # Contains a previous backup of the Terraform state file.
+- `.terraform/`                  Contains the downloaded Terraform providers and modules.
+- `terraform.tfstate`            Stores Terraform's current record of the managed infrastructure.
+- `terraform.tfstate.backup `    Contains a previous backup of the Terraform state file.
