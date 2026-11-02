@@ -352,7 +352,7 @@ assignment-1-wordpress-deployment/
 ├── outputs.tf             # Defines outputs for the EC2 instance ID, public IPv4 address, and public DNS.
 └── terraform.tfvars       # Provides values for the input variables declared in variables.tf.
 ```
-The .terraform/ directory and the two state files, terraform.tfstate and terraform.tfstate.backup, are also present in the project root directory but excluded from GitHub.
+The .terraform/ directory and the two state files, terraform.tfstate and terraform.tfstate.backup, are also present in the project root directory but excluded from GitHub:
 
 - **.terraform/** – Contains downloaded Terraform providers and modules.
 - **terraform.tfstate** – Stores the current state of the managed infrastructure.
