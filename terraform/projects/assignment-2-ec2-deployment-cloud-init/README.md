@@ -271,7 +271,7 @@ Provided the required input variable values to configure the security group, all
 
 The security group ID is exposed through the module's output block and referenced by the ec2 module, allowing both modules to work together.
 
-#### 7. Deploying the resources to the AWS cloud
+### 7. Deploying the resources to the AWS cloud
 
 Ran the following to deploy the resources to the cloud:
 
@@ -284,13 +284,17 @@ terraform plan # Created an execution plan and determined the actions required t
 
 terraform apply # Applied the changes defined in the Terraform configuration files to create the infrastructure.
 ```
+Then I was then able to access the Apache default web page through the EC2 instance's public IPv4 address and public DNS:
+
+<img width="1366" height="727" alt="image" src="https://github.com/user-attachments/assets/bfa7bd96-f2a7-4f2a-84cb-9e85aaf62255" />
+
+<img width="1366" height="730" alt="image" src="https://github.com/user-attachments/assets/e0f827d0-b19a-44d1-8e02-3bbf663b2c5b" />
 
 ---
  
 ### What I learnt
 
-1. Terraform's file() function can be used to use an external file as the user data, such as cloud-init.yaml, rather than embedding the entire script 
-directly in the Terraform configuration.
+1. Terraform's file() function can be used to use an external file as the user data, such as cloud-init.yaml, rather than embedding the entire script directly in the Terraform configuration.
 
 2. A cloud-init YAML file can be used to configure a EC2 instance when it first starts. 
 
@@ -309,8 +313,10 @@ From doing this, I learnt:
 5. Parent modules can access the child module outputs using `module.<CHILD_MODULE_NAME>.<OUTPUT_NAME>` syntax. This then allows us
 to use those outputs for other parts of our configuration.
 
-6. I don't fully understand 
-╷
+6. A file path provided directly in Terraform's file function `file(path)` is relative to Terraform's current working directory. This means Terraform looks for the file in the directory where the Terraform command is run, rather than the directory containing the .tf file in which the function is written.
+
+**Error message:**
+
 │ Error: Invalid function argument
 │ 
 │   on modules\ec2\ec2.tf line 5, in resource "aws_instance" "a2_ec2_instance":
@@ -322,6 +328,7 @@ to use those outputs for other parts of our configuration.
 │ only with files that are distributed as part of the configuration source code, so if this file
 │ will be created by a resource in this configuration you must instead obtain this result from
 │ an attribute of that resource.
+
 
 
 ---
@@ -413,7 +420,9 @@ To resolve this issue, I needed to pass the security group's ID from the securit
 ```
 After this, the error was resolved.
 
-### 5. ???
+### 5. Invalid function argument for the `file()` function
+
+**Error message:**
 
 │ Error: Invalid function argument
 │ 
@@ -426,7 +435,14 @@ After this, the error was resolved.
 │ only with files that are distributed as part of the configuration source code, so if this file
 │ will be created by a resource in this configuration you must instead obtain this result from
 │ an attribute of that resource.
-╵
+
+**Cause:**
+
+The `cloud-init.yaml` file was located inside the `modules/ec2/` directory. However, Terraform's `file()` function resolves relative file paths from the current working directory, which in this case was the project root directory (`assignment-2-ec2-deployment-cloud-init`). As a result, Terraform could not find the file using `file("cloud-init.yaml")`.
+
+**Solution:**
+
+I moved `cloud-init.yaml` into the project root directory, where Terraform could locate it using `file("cloud-init.yaml")`. This resolved the error.
 
 ---
 
