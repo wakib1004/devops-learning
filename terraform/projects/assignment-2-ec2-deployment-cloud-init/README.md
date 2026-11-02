@@ -1,8 +1,7 @@
 # Deployed an EC2 instance and configured it using Terraform and a cloud-init file
 
 Used Terraform to provision and configure an EC2 instance, use a cloud-init YAML file as the user data to install Apache HTTP server and to provision and 
-configure the security group for the EC2 instance to allow inbound HTTP access and all outbound traffic. Structured the Terraform code for clarity using 
-variables and modules to make the code dynamic and reusable.
+configure the security group for the EC2 instance to allow inbound HTTP access and all outbound traffic. Structured the Terraform code for clarity using variables and modules to make the code dynamic and reusable.
 
 ---
 
