@@ -315,22 +315,6 @@ to use those outputs for other parts of our configuration.
 
 6. A file path provided directly in Terraform's file function `file(path)` is relative to Terraform's current working directory. This means Terraform looks for the file in the directory where the Terraform command is run, rather than the directory containing the .tf file in which the function is written.
 
-**Error message:**
-
-│ Error: Invalid function argument
-│ 
-│   on modules\ec2\ec2.tf line 5, in resource "aws_instance" "a2_ec2_instance":
-│    5:     user_data = file("cloud-init.yaml")
-│     ├────────────────
-│     │ while calling file(path)
-│ 
-│ Invalid value for "path" parameter: no file exists at "cloud-init.yaml"; this function works
-│ only with files that are distributed as part of the configuration source code, so if this file
-│ will be created by a resource in this configuration you must instead obtain this result from
-│ an attribute of that resource.
-
-
-
 ---
 
 ## Any issues I hit and how I fixed them
@@ -364,7 +348,6 @@ user_data = file("cloud-init.yaml")
 
 After making this change, Terraform was able to recognise the filename correctly and the error was resolved.
 
-
 ### 2. 'This site can't be reached'
 
 **Solution:**
@@ -374,6 +357,7 @@ I created a secuirty group with inbound rule allowing HTTP traffic from anywhere
 
 **Error Message: 
 
+```text
 │  Error: Module not installed
 │
 │   on main.tf line 1:
@@ -382,6 +366,8 @@ I created a secuirty group with inbound rule allowing HTTP traffic from anywhere
 │ This module is not yet installed. Run "terraform init" to install all modules required by this
 │ configuration.
 ╵
+```
+
 Same error was there for the `security_group` module.
 
 **Solution:** 
@@ -391,6 +377,7 @@ I ran the command `terraform init` to download the modules and the error was res
 
 **Error message:**
 
+```text
 │ Error: Reference to undeclared resource
 │ 
 │   on modules\ec2\ec2.tf line 4, in resource "aws_instance" "a2_ec2_instance":
@@ -398,6 +385,7 @@ I ran the command `terraform init` to download the modules and the error was res
 │ 
 │ A managed resource "aws_security_group" "a2_ec2_instance_sg" has not been declared in
 │ module.ec2.
+```
 
 **Cause:**
 
@@ -424,6 +412,7 @@ After this, the error was resolved.
 
 **Error message:**
 
+```text
 │ Error: Invalid function argument
 │ 
 │   on modules\ec2\ec2.tf line 5, in resource "aws_instance" "a2_ec2_instance":
@@ -435,6 +424,7 @@ After this, the error was resolved.
 │ only with files that are distributed as part of the configuration source code, so if this file
 │ will be created by a resource in this configuration you must instead obtain this result from
 │ an attribute of that resource.
+```
 
 **Cause:**
 
