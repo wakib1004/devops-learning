@@ -64,7 +64,7 @@ The Terraform code is organised into separate files to keep the infrastructure c
 
 ## What I built
 
-1. Terraform Provider Configuration
+### 1. Terraform Provider Configuration
 
 ```hcl
 terraform {
@@ -83,7 +83,8 @@ provider "aws" {
 ```
 Configured the Terraform AWS provider (which is a plugin) to allow Terraform to communicate with AWS. Specified the AWS region (eu-north-1). This enables Terraform to provision and manage AWS resources within that specified region.
 
-2. Variables
+### 2. Configuring the input variables
+
 ```hcl
 variable "ami" {
   type = string
@@ -95,9 +96,10 @@ variable "instance_type" {
 
 ```
 
-Configured variable blocks in a seperate variables.tf file, defining input variables to ensure the Terraform code is dynamic and reusable.
+Configured variable blocks in a seperate variables.tf file to ensure the Terraform code is dynamic and reusable.
 
-3. Configuration of the values of the input variables
+### 3. Configuration of the values of the input variables
+
 ```hcl
 ami = "ami-021aaf3749be66813"
 instance_type = "t3.micro"
@@ -105,7 +107,7 @@ instance_type = "t3.micro"
 
 Configured the values of the input variables in a seperate file terraform.tfvars
 
-4. Creating the user data script for the EC2 instance 
+### 4. Creating the user data script for the EC2 instance 
 
 ```bash
    #!/bin/bash
@@ -153,7 +155,7 @@ Configured the values of the input variables in a seperate file terraform.tfvars
    sed -i "s/password_here/$${DB_password}/" /var/www/html/wordpress/wp-config.php
 ```
 
-5. Configuration of the Security Group
+### 5. Configuration of the Security Group
 
 ```hcl 
 resource "aws_security_group" "wordpress_instance_sg" {
@@ -186,7 +188,7 @@ Configured the security group `wordpress_instance_sg` with the following:
 
 This is to ensure there is a public endpoint where we can reach the web server.
 
-6. Configuration of the EC2 instance
+### 6. Configuration of the EC2 instance
 
 ```hcl
 resource "aws_instance" "wordpress_instance" {
@@ -243,9 +245,9 @@ EOF
 }
 ``` 
 
-Configured an EC2 t3.micro instance with Ubuntu Server 26.04 LTS and assigned a public IP address to establish a publicly accessible endpoint
+Configured an EC2 t3.micro instance running Ubuntu Server 26.04 LTS, which had a public IP address to make it publicly accessible.
 
-7. Configuration of the output variables
+### 7. Configuration of the output variables
 
 ```hcl 
 output "instance_id" {
@@ -267,7 +269,7 @@ Configured the ouput variables to display instance details such as the ID, publi
 and the public DNS after the command `terraform apply`
 has been completed.
 
-8. Deploying to AWS cloud
+### 8. Deploying to AWS cloud
 
 ```bash 
 
@@ -285,10 +287,10 @@ terraform plan #Creates an execution plan and determines the actions required to
 terraform apply #Applies the changes defined in the Terraform configuration files to create, update, or destroy infrastructure as required.
 
 ```
-Then the site was live on both 51.21.171.237/wordpress and <custom domain>/wordpress: 
+
+The site was then accessible via both `http://<public_IP>/wordpress` and `http://<custom_domain>/wordpress`.
 
 <img width="995" height="686" alt="wordpress_screenshot" src="https://github.com/user-attachments/assets/c9be125b-7153-4ea3-b731-6850d552786d" />
-
 
 ---
 
@@ -335,11 +337,23 @@ After making these changes, the database connection error was resolved.
 
 ----
 
-## Files
+## Project Structure
 
-- [`README.md`](README.md) - this file
-- [`variables.tf`](variables.tf) - input variables (instance type, AMI, region)
-- [`main.tf`](main.tf) - EC2 instance, security group, and AWS provider
-- [`outputs.tf`](outputs.tf) - the IP and domain URLs printed after `terraform apply` command
-- [`terraform.tfvars`](terraform.tfvars) - Defines the actual values assigned to the input variables declared in variables.tf
-- [`.gitignore`](.gitignore) - used to exclude the state file, `terraform.tfstate.backup` and the `.terraform` directory
+## Project Structure
+
+```text
+assignment-1-wordpress-deployment/
+│
+├── .terraform.lock.hcl    # Locks Terraform provider versions and records their checksums.
+├── .gitignore             # Specifies files and directories Git should ignore.
+├── README.md              # This file.
+├── main.tf                # Defines the AWS provider, security group, and EC2 instance.
+├── variables.tf           # Declares input variables for the AMI and EC2 instance type.
+├── outputs.tf             # Defines outputs for the EC2 instance ID, public IPv4 address, and public DNS.
+└── terraform.tfvars       # Provides values for the input variables declared in variables.tf.
+```
+The .terraform/ directory and the two state files, terraform.tfstate and terraform.tfstate.backup, are also present in the project root directory but excluded from GitHub.
+
+- **.terraform/** – Contains downloaded Terraform providers and modules.
+- **terraform.tfstate** – Stores the current state of the managed infrastructure.
+- **terraform.tfstate.backup** – Contains a backup of the previous Terraform state file.
