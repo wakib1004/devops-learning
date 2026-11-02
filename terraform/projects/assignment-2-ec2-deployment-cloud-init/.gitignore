@@ -1,0 +1,9 @@
+# Local .terraform directories
+**/.terraform/*
+
+# EXclude .tfstate files - contain sensitive data
+*.tfstate
+*.tfstate.*
+
+crash.log
+crash.*.log
