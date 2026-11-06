@@ -39,7 +39,7 @@ Created the Dockerfile to define the instructions required to build a Docker ima
 
 ### 3. Created a repository secret and a repository variable
 
-- `DOCKERHUB_TOKEN`: Created a repository secret containing my Docker Hub access token. This token is used to authenticate with Docker Hub during the GitHub Actions workflow.
+- `DOCKERHUB_TOKEN`: Created a repository secret containing my Docker Hub access token. This token is used to authenticate with Docker Hub during the GitHub Actions workflow and it should not be hardcoded within the code base.
 
 - `DOCKERHUB_USERNAME`: Created a repository variable containing my Docker Hub username, which is used to identify my Docker Hub account when pushing the image.
 
@@ -104,6 +104,19 @@ This workflow builds and pushes the container image to Docker Hub whenever code 
 
 ---
 
+### 5. Successful ???
+
+**GitHub Actions Workflow**
+
+The GitHub Actions workflow executed successfully, completing all the configured steps without errors.
+
+<img width="672" height="610" alt="Successful GitHub Actions workflow" src="https://github.com/user-attachments/assets/131d277a-071d-4135-97de-0889c7692b0d" />
+
+**Docker Hub Image**
+
+The Docker image was successfully built and pushed to my Docker Hub repository with the `latest` tag.
+
+<img width="907" height="635" alt="image" src="https://github.com/user-attachments/assets/962b992a-e625-4230-97ae-58854f598cf3" />
 
 
 
