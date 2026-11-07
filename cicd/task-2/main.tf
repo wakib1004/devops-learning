@@ -14,5 +14,5 @@ provider "aws" {
 
 resource "aws_instance" "ec2" {
   ami = 
-  instnce_type = t3.mico
+  instce_type = t3.micro
 }
