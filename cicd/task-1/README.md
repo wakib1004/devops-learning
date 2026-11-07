@@ -79,15 +79,11 @@ jobs:
           # Docker Hub access token stored as a GitHub secret
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      # Step 3 - Set up QEMU for emulation and multi-platform builds
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v4
-
-      # Step 4 - Set up Docker Buildx for building container images
+      # Step 3 - Set up Docker Buildx
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v4
 
-      # Step 5 - Build the Docker image and push it to Docker Hub
+      # Step 4 - Build the Docker image and push it to Docker Hub
       - name: Build and push
         uses: docker/build-push-action@v7
         with:
@@ -119,6 +115,8 @@ The Docker image was successfully built and pushed to my Docker Hub repository w
 <img width="907" height="635" alt="image" src="https://github.com/user-attachments/assets/962b992a-e625-4230-97ae-58854f598cf3" />
 
 ---
+
+
 
 
 
