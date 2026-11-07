@@ -108,13 +108,13 @@ This workflow builds and pushes the container image to Docker Hub whenever code 
 
 The GitHub Actions workflow executed successfully, completing all the configured steps without errors.
 
-<img width="672" height="610" alt="Successful GitHub Actions workflow" src="https://github.com/user-attachments/assets/131d277a-071d-4135-97de-0889c7692b0d" />
+<img width="759" height="606" alt="task-1-workflow-successful" src="https://github.com/user-attachments/assets/f94d41f4-8c25-4153-8f4f-78b1622dae43" />
 
 **Docker Hub Image**
 
 The Docker image was successfully built and pushed to my Docker Hub repository with the `latest` tag.
 
-<img width="907" height="635" alt="image" src="https://github.com/user-attachments/assets/962b992a-e625-4230-97ae-58854f598cf3" />
+<img width="899" height="641" alt="task-1-pushed-to-dockerhub" src="https://github.com/user-attachments/assets/217c2f1e-c328-4e2f-9b4f-05e17f8b62b0" />
 
 ---
 ## What I learnt 
