@@ -1,6 +1,8 @@
-# Title
+# Building and Pushing a Container Image Using a GitHub Actions Workflow
 
-<Description>
+This project demonstrates how I automated building and pushing a Docker image for a Python application to Docker Hub using GitHub Actions whenever code is pushed to the repository.
+
+---
 
 ## What I built 
 
@@ -39,7 +41,7 @@ Created the Dockerfile to define the instructions required to build a Docker ima
 
 ### 3. Created a repository secret and a repository variable
 
-- `DOCKERHUB_TOKEN`: Created a repository secret containing my Docker Hub access token. This token is used to authenticate with Docker Hub during the GitHub Actions workflow and it should not be hardcoded within the code base.
+- `DOCKERHUB_TOKEN`: Created a repository secret containing my Docker Hub access token. This token is used to authenticate with Docker Hub during the GitHub Actions workflow and it should not be hardcoded in the codebase.
 
 - `DOCKERHUB_USERNAME`: Created a repository variable containing my Docker Hub username, which is used to identify my Docker Hub account when pushing the image.
 
@@ -51,7 +53,7 @@ Created a GitHub Actions workflow named `ci.yaml` inside the `.github/workflows`
 
 ```yaml
 # Name of the GitHub Actions workflow
-name: Build and push container image to DockerHub
+name: Build and push container image to Docker Hub
 
 # Trigger the workflow whenever code is pushed to the repository
 on: [push]
@@ -97,7 +99,7 @@ jobs:
           # Push the built image to Docker Hub
           push: true
 
-          # Pushes the image to Docker Hub with the `latest` tag.
+          # Pushes the built image to Docker Hub with the `latest` tag.
           tags: ${{ vars.DOCKERHUB_USERNAME }}/python-app:latest
 ```
 This workflow builds and pushes the container image to Docker Hub whenever code is pushed to the repository.
@@ -121,11 +123,11 @@ The Docker image was successfully built and pushed to my Docker Hub repository w
 ---
 ## What I learnt 
 
-**1. Using Repository Variables in GitHub Actions:** A repository variable can be refrenced within a GitHub Actions workflow by writing `${{ vars.<variable_name>}}`
+**1. Using Repository Variables in GitHub Actions:** A repository variable can be referenced within a GitHub Actions workflow by writing `${{ vars.<variable_name>}}`
 
 **2. Authenticating with Docker Hub:** The action `docker/login-action@v4` is used to authenticate with Docker Hub from a GitHub Actions workflow. It accepts a username and password as inputs. For Docker Hub authentication, the Docker Hub username and a personal access token can be provided instead of the account password.
 
-**3. Building and pushing an Docker image to DockerHub:** I've learnt how to use the action `docker/build-push-action@v7` to build a Docker image using a Dockerfile and push that image to DockerHub directly from a Github Actions workflow.
+**3. Building and pushing a Docker image to Docker Hub:** I've learnt how to use the action `docker/build-push-action@v7` to build a Docker image using a Dockerfile and push that image to Docker Hub directly from a GitHub Actions workflow.
 
 ---
 
@@ -160,9 +162,6 @@ To resolve the issue, I added the following step before the Docker build step:
 
 **Result:** The `actions/checkout@v6` action downloads the repository contents into the GitHub Actions runner's workspace, making the files and directories available to subsequent workflow steps. 
 Then the error was resolved.
-
----
-
 
 
 
