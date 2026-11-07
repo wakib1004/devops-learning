@@ -1,4 +1,4 @@
-# Title
+# Automatically Linting Terraform Code on Every Push
 
 <description>
 
@@ -70,27 +70,23 @@ This ensures Terraform code is automatically checked for potential errors, synta
 
 The GitHub Actions workflow executed successfully, completing all the configured steps without errors.
 
+<img width="995" height="574" alt="task-2-workflow-successful" src="https://github.com/user-attachments/assets/a89e0080-8524-436a-bbcd-1c9ad6867f99" />
+
 **Linting Terraform code**
 
 After Linting was completed the error was displayed:
 
-
-
+<img width="1019" height="595" alt="task-2-linting-successful" src="https://github.com/user-attachments/assets/607bd872-653b-4212-9adc-ead056afdaaa" />
 
 ---
 
 ## What I learnt 
 
-1. 
-
-
----
-
-## Issues I've solved
-
-
+1. The GitHub Action `actionshub/terraform-lint@main` is used to lint the Terraform code.
 
 ---
+
+
 
 
 
