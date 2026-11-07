@@ -104,7 +104,7 @@ This workflow builds and pushes the container image to Docker Hub whenever code 
 
 ---
 
-### 5. Successful ???
+### 5. Successful Execution and Deployment
 
 **GitHub Actions Workflow**
 
@@ -117,6 +117,8 @@ The GitHub Actions workflow executed successfully, completing all the configured
 The Docker image was successfully built and pushed to my Docker Hub repository with the `latest` tag.
 
 <img width="907" height="635" alt="image" src="https://github.com/user-attachments/assets/962b992a-e625-4230-97ae-58854f598cf3" />
+
+---
 
 
 
