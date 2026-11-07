@@ -119,7 +119,49 @@ The Docker image was successfully built and pushed to my Docker Hub repository w
 <img width="907" height="635" alt="image" src="https://github.com/user-attachments/assets/962b992a-e625-4230-97ae-58854f598cf3" />
 
 ---
+## What I learnt 
 
+**1. Using Repository Variables in GitHub Actions:** A repository variable can be refrenced within a GitHub Actions workflow by writing `${{ vars.<variable_name>}}`
+
+**2. Authenticating with Docker Hub:** The action `docker/login-action@v4` is used to authenticate with Docker Hub from a GitHub Actions workflow. It accepts a username and password as inputs. For Docker Hub authentication, the Docker Hub username and a personal access token can be provided instead of the account password.
+
+**3. Building and pushing an Docker image to DockerHub:** I've learnt how to use the action `docker/build-push-action@v7` to build a Docker image using a Dockerfile and push that image to DockerHub directly from a Github Actions workflow.
+
+---
+
+## Issues I've solved
+
+### 1. Nothing appeared in the Actions section of my GitHub repository
+
+**Cause and Solution**
+
+- I initially created the `.github/workflows` directory inside the `task-1` directory instead of the root directory of my repository.
+
+- GitHub Actions only detects workflow files located in the `.github/workflows` directory at the root of the repository.
+
+- To resolve the issue, I deleted the incorrectly placed `.github/workflows` directory and recreated it at the root of my repository.
+
+**Result:** Once I moved the workflow file into the correct directory and pushed the changes to GitHub, GitHub Actions could detect the workflow and execute it.
+
+### 2. Docker image build failed because the build context path could not be found
+
+**Cause and Solution**
+
+- The Docker image build failed because the specified build context path (`./cicd/task-1`) could not be found.
+
+- The cause was that I had not included the repository checkout step in my GitHub Actions workflow. So GitHub Actions did not have access to the repository files needed for the build.
+
+To resolve the issue, I added the following step before the Docker build step:
+
+```yaml
+   - name: checkout repository
+     uses: actions/checkout@v6
+```
+
+**Result:** The `actions/checkout@v6` action downloads the repository contents into the GitHub Actions runner's workspace, making the files and directories available to subsequent workflow steps. 
+Then the error was resolved.
+
+---
 
 
 
