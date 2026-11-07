@@ -1,6 +1,6 @@
 # Automatically Linting Terraform Code on Every Push
 
-<description>
+Created an intentionally invalid Terraform configuration and implemented a GitHub Actions workflow to automatically lint the Terraform code whenever changes are pushed to the GitHub repository.
 
 ---
 
