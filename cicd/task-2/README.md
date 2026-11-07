@@ -72,6 +72,8 @@ The GitHub Actions workflow executed successfully, completing all the configured
 
 **Linting Terraform code**
 
+After Linting was completed the error was displayed:
+
 
 
 
